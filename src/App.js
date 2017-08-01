@@ -18,13 +18,31 @@ class App extends Component {
   addscore(e) {
     e.preventDefault(); // <- prevent form submit from reloading the page
     /* Send the score to Firebase */
-    fire.database().ref('scores').push(this.inputEl.value);
-    this.inputEl.value = ''; // <- clear the input
+    fire.database().ref('scores').push({
+      gameDate: this.date.value,
+      asshole: this.assHole.value,
+      cashWon: this.cashWon.value,
+      position: this.position.value,
+      president: this.president.value,
+      who: this.who.value
+    }
+    );
+    this.date.value = ''; // <- clear the input
+    this.assHole.value = '';
+    this.cashWon.value = '';
+    this.position.value = '';
+    this.president.value = '';
+    this.who.value = '';
   }
   render() {
     return (
       <form onSubmit={this.addscore.bind(this)}>
-        <input type="text" placeholder="don't use me yet" ref={el => this.inputEl = el} />
+        <input type="text" placeholder="Date " ref={el => this.date = el} />
+        <input type="text" placeholder="Ass Hole " ref={el => this.assHole = el} />
+        <input type="text" placeholder="Cash won " ref={el => this.cashWon = el} />
+        <input type="text" placeholder="Position " ref={el => this.position = el} />
+        <input type="text" placeholder="President " ref={el => this.president = el} />
+        <input type="text" placeholder="Who " ref={el => this.who = el} />
         <input type="submit" />
         <ul>
           { /* Render the list of scores */
