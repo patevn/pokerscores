@@ -27,7 +27,8 @@ class App extends Component {
       who: this.who.value
     }
     );
-    this.date.value = ''; // <- clear the input
+    // <- clear the input
+    this.date.value = '';
     this.assHole.value = '';
     this.cashWon.value = '';
     this.position.value = '';
@@ -38,11 +39,20 @@ class App extends Component {
     return (
       <form onSubmit={this.addscore.bind(this)}>
         <input type="text" placeholder="Date " ref={el => this.date = el} />
-        <input type="text" placeholder="Ass Hole " ref={el => this.assHole = el} />
         <input type="text" placeholder="Cash won " ref={el => this.cashWon = el} />
         <input type="text" placeholder="Position " ref={el => this.position = el} />
-        <input type="text" placeholder="President " ref={el => this.president = el} />
+        President:
+        <select ref={el => this.president = el}  onChange={this.handleChange}>
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
         <input type="text" placeholder="Who " ref={el => this.who = el} />
+        Asshole:
+        <select ref={el => this.assHole = el} onChange={this.handleChange}>
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
+
         <input type="submit" />
         <ul>
           { /* Render the list of scores */
@@ -55,4 +65,3 @@ class App extends Component {
 }
 
 export default App;
-
