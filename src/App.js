@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import fire from './fire';
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { scores: [] }; // <- set up react state
@@ -15,6 +15,18 @@ class App extends Component {
       this.setState({ scores: [score].concat(this.state.scores) });
     })
   }
+  render() {
+    return (
+      <div>
+        <InputForm />
+        {/*<OutputForm />*/}
+      </div>
+    );
+  }
+}
+
+
+class InputForm extends React.Component {
   addscore(e) {
     e.preventDefault(); // <- prevent form submit from reloading the page
     /* Send the score to Firebase */
@@ -42,7 +54,7 @@ class App extends Component {
         <input type="text" placeholder="Cash won " ref={el => this.cashWon = el} />
         <input type="text" placeholder="Position " ref={el => this.position = el} />
         President:
-        <select ref={el => this.president = el}  onChange={this.handleChange}>
+        <select ref={el => this.president = el} onChange={this.handleChange}>
           <option value="true">true</option>
           <option value="false">false</option>
         </select>
@@ -54,12 +66,18 @@ class App extends Component {
         </select>
 
         <input type="submit" />
-        <ul>
-          { /* Render the list of scores */
-            this.state.scores.map(score => <li key={score.id}>{score.text.gameDate} <b>AssHole:</b> {score.text.asshole} <b>Cash Won:</b> {score.text.cashWon} <b>Position:</b> {score.text.position} <b>President:</b> {score.text.president} <b>Who:</b> {score.text.who}</li>)
-          }
-        </ul>
-      </form>
+      </form>)
+  }
+}
+
+class OutputForm extends React.Component {
+  render() {
+    return (
+      <ul >
+        { /* Render the list of scores */
+          {/*this.state.scores.map(score => <li key={score.id}>{score.text.gameDate} <b>AssHole:</b> {score.text.asshole} <b>Cash Won:</b> {score.text.cashWon} <b>Position:</b> {score.text.position} <b>President:</b> {score.text.president} <b>Who:</b> {score.text.who}</li>)*/}
+        }
+      </ul >
     );
   }
 }
