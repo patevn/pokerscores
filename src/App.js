@@ -16,10 +16,11 @@ class App extends React.Component {
     })
   }
   render() {
+      debugger;
     return (
       <div>
         <InputForm />
-        {/*<OutputForm />*/}
+         <OutputForm testy={this.state} /> 
       </div>
     );
   }
@@ -69,17 +70,17 @@ class InputForm extends React.Component {
       </form>)
   }
 }
-
-class OutputForm extends React.Component {
-  render() {
+//global problem, or did thi solve that? then why does this hav.scores have anythign in it? maybe thats it!
+function OutputForm(props) {
+    debugger;
     return (
       <ul >
         { /* Render the list of scores */
-          {/*this.state.scores.map(score => <li key={score.id}>{score.text.gameDate} <b>AssHole:</b> {score.text.asshole} <b>Cash Won:</b> {score.text.cashWon} <b>Position:</b> {score.text.position} <b>President:</b> {score.text.president} <b>Who:</b> {score.text.who}</li>)*/}
+ 
+          props.testy.scores.map(score => <li key={score.id}>{score.text.gameDate} <b>AssHole:</b> {score.text.asshole} <b>Cash Won:</b> {score.text.cashWon} <b>Position:</b> {score.text.position} <b>President:</b> {score.text.president} <b>Who:</b> {score.text.who}</li>)
         }
       </ul >
     );
-  }
 }
 
 export default App;
