@@ -16,7 +16,6 @@ class App extends React.Component {
     })
   }
   render() {
-    debugger;
     return (
       <div>
         <InputForm />
@@ -72,7 +71,6 @@ class InputForm extends React.Component {
 }
 
 function OutputForm(props) {
-  debugger;
   return (
     <ul >
       { /* Render the list of scores */
