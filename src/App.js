@@ -7,12 +7,17 @@ class App extends React.Component {
     this.state = { scores: [] }; // <- set up react state
   }
   componentWillMount() {
+    var myArray = [];
+    var counter = 0;
     /* Create reference to scores in Firebase Database */
-    let scoresRef = fire.database().ref('scores').orderByKey().limitToLast(100);
+    let scoresRef = fire.database().ref('scores').orderByKey();
     scoresRef.on('child_added', snapshot => {
       /* Update React state when score is added at Firebase Database */
       let score = { text: snapshot.val(), id: snapshot.key };
-      this.setState({ scores: [score].concat(this.state.scores) });
+      myArray.push(score);
+      counter = counter++;
+      if (snapshot.hasChildren() === undefined || snapshot.hasChildren() === false || snapshot.hasChildren() === null)
+        this.setState({ scores: myArray });
     })
   }
   render() {
@@ -23,6 +28,16 @@ class App extends React.Component {
       </div>
     );
   }
+}
+function OutputForm(props) {
+  return (
+    <ul >
+      { /* Render the list of scores */
+
+        props.testy.scores.map(score => <li key={score.id}>{score.text.gameDate} <b>AssHole:</b> {score.text.asshole} <b>Cash Won:</b> {score.text.cashWon} <b>Position:</b> {score.text.position} <b>President:</b> {score.text.president} <b>Who:</b> {score.text.who}</li>)
+      }
+    </ul >
+  );
 }
 
 
@@ -70,15 +85,5 @@ class InputForm extends React.Component {
   }
 }
 
-function OutputForm(props) {
-  return (
-    <ul >
-      { /* Render the list of scores */
-
-        props.testy.scores.map(score => <li key={score.id}>{score.text.gameDate} <b>AssHole:</b> {score.text.asshole} <b>Cash Won:</b> {score.text.cashWon} <b>Position:</b> {score.text.position} <b>President:</b> {score.text.president} <b>Who:</b> {score.text.who}</li>)
-      }
-    </ul >
-  );
-}
 
 export default App;
