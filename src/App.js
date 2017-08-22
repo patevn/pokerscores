@@ -45,9 +45,9 @@ class App extends React.Component {
 }
 
 function OutputForm(props) {
-  var result = Object.keys(props.testy.scores).map(function (key) {
-    return [Number(key), props.testy.scores[key]];
-  });
+
+var result = Object.values(props.testy.scores);
+
   return (
     <ul >
       {
