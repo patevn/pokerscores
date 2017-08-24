@@ -51,8 +51,9 @@ var result = Object.values(props.testy.scores);
   return (
     <ul >
       {
-
-        result.map(scores => <li key={scores.id}>{scores.gameDate} <b>AssHole:</b> {scores.asshole} <b>Cash Won:</b> {scores.cashWon} <b>Position:</b> {scores.position} <b>President:</b> {scores.president} <b>Who:</b> {scores.who}</li>)
+        <li key={result[0].id}>
+          {result[0].gameDate} <b>AssHole:</b> {result[0].asshole} <b>Cash Won:</b> {result[0].cashWon} <b>Position:</b> {result[0].position} <b>President:</b> {result[0].president} <b>Who:</b> {result[0].who}
+        </li>
       }
     </ul >
   );
