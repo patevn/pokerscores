@@ -44,18 +44,24 @@ class App extends React.Component {
   }
 }
 
+
 function OutputForm(props) {
 
-var result = Object.values(props.testy.scores);
+  var results = [];
+  var result = Object.values(props.testy.scores);
+  var i;
+
+  for (i = 0; i < result.length; i++) {
+    results.push(<tbody key={result[i].id}><tr><td>{result[i].gameDate}</td> <td><b>AssHole:</b>{result[i].asshole}</td> <td><b>Cash Won:</b>{result[i].cashWon}</td>
+      <td><b>Position:</b>{result[i].position}</td> <td><b>President:</b>{result[i].president}</td> <td><b>Who:</b>{result[i].who}</td></tr></tbody>)
+  }
 
   return (
-    <ul >
+    <table >
       {
-        <li key={result[0].id}>
-          {result[0].gameDate} <b>AssHole:</b> {result[0].asshole} <b>Cash Won:</b> {result[0].cashWon} <b>Position:</b> {result[0].position} <b>President:</b> {result[0].president} <b>Who:</b> {result[0].who}
-        </li>
+        results
       }
-    </ul >
+    </table>
   );
 }
 
