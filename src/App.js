@@ -8,7 +8,8 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      scores: []
+      scores: [],
+      iterator: 0
     };
 
     var _this = this;
@@ -31,12 +32,30 @@ class App extends React.Component {
 
   }
 
+  handleClickNext(e) {
+    this.setState({
+      iterator: this.state.iterator + 1
+    });
+  }
+
+  handleClickPrev(e) {
+    this.setState({
+      iterator: this.state.iterator - 1
+    });
+  }
+
   render() {
     if (this.state.scores.valueOf(0).length == 0)
       return null;
     else {
       return (
         <div>
+          <button onClick={(e) => this.handleClickPrev(e)}>
+            Prev
+          </button>
+          <button onClick={(e) => this.handleClickNext(e)}>
+            Next
+          </button>
           <OutputForm testy={this.state} />
         </div>
       );
@@ -44,54 +63,26 @@ class App extends React.Component {
   }
 }
 
-class NextButton extends React.Component {
-  constructor(props) {
-    var iterator = 0;
-    super(props)
-    this.state = {
-      iterator
-    };
-  }
-
-  handleClick() {
-    this.state.iterator++;
-    console.log(this.state.iterator);
-  }
-
-  render() {
-    // This syntax ensures `this` is bound within handleClick
-    return (
-      <button onClick={(e) => this.handleClick(e)}>
-        Click me
-      </button>
-    );
-  }
-}
-
-
 function OutputForm(props) {
 
   var results = [];
   var result = Object.values(props.testy.scores);
   var i;
 
-  for (i = 0; i < result.length; i++) {
+  for (i = 0; i < props.testy.iterator; i++) {
     results.push(<tbody key={result[i].id}><tr><td>{result[i].gameDate}</td><td><b>AssHole:</b>{result[i].asshole}</td><td><b>Cash Won:</b>{result[i].cashWon}</td>
       <td><b>Position:</b>{result[i].position}</td><td><b>President:</b>{result[i].president}</td><td><b>Who:</b>{result[i].who}</td></tr></tbody>)
   }
 
   return (
     <div>
-    <NextButton />
-    <table >
-      {
-        results
-      }
-    </table>
+      <table >
+        {
+          results
+        }
+      </table>
     </div>
   );
 }
-
-
 
 export default App;
