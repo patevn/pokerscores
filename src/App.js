@@ -44,6 +44,30 @@ class App extends React.Component {
   }
 }
 
+class NextButton extends React.Component {
+  constructor(props) {
+    var iterator = 0;
+    super(props)
+    this.state = {
+      iterator
+    };
+  }
+
+  handleClick() {
+    this.state.iterator++;
+    console.log(this.state.iterator);
+  }
+
+  render() {
+    // This syntax ensures `this` is bound within handleClick
+    return (
+      <button onClick={(e) => this.handleClick(e)}>
+        Click me
+      </button>
+    );
+  }
+}
+
 
 function OutputForm(props) {
 
@@ -52,16 +76,19 @@ function OutputForm(props) {
   var i;
 
   for (i = 0; i < result.length; i++) {
-    results.push(<tbody key={result[i].id}><tr><td>{result[i].gameDate}</td> <td><b>AssHole:</b>{result[i].asshole}</td> <td><b>Cash Won:</b>{result[i].cashWon}</td>
-      <td><b>Position:</b>{result[i].position}</td> <td><b>President:</b>{result[i].president}</td> <td><b>Who:</b>{result[i].who}</td></tr></tbody>)
+    results.push(<tbody key={result[i].id}><tr><td>{result[i].gameDate}</td><td><b>AssHole:</b>{result[i].asshole}</td><td><b>Cash Won:</b>{result[i].cashWon}</td>
+      <td><b>Position:</b>{result[i].position}</td><td><b>President:</b>{result[i].president}</td><td><b>Who:</b>{result[i].who}</td></tr></tbody>)
   }
 
   return (
+    <div>
+    <NextButton />
     <table >
       {
         results
       }
     </table>
+    </div>
   );
 }
 
