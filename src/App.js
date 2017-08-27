@@ -50,10 +50,10 @@ class App extends React.Component {
     else {
       return (
         <div>
-          <button onClick={(e) => this.handleClickPrev(e)}>
+          <button disabled={this.state.iterator <= 0} onClick={(e) => this.handleClickPrev(e)}>
             Prev
           </button>
-          <button onClick={(e) => this.handleClickNext(e)}>
+          <button disabled={this.state.iterator >= Object.keys(this.state.scores).length} onClick={(e) => this.handleClickNext(e)}>
             Next
           </button>
           <OutputForm testy={this.state} />
