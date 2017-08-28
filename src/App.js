@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import fire from './fire';
 import * as axios from 'axios';
 
 class App extends React.Component {
@@ -15,7 +14,7 @@ class App extends React.Component {
     var _this = this;
     this.serverRequest =
       axios
-        .get('https://pokerscores-b2b64.firebaseio.com/scores.json')
+        .get('https://pokerscores-a9da7.firebaseio.com/scores.json')
         .then(function (result) {
           console.log(result.data);
           console.log(result.status);
@@ -29,7 +28,6 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.serverRequest.abort();
-
   }
 
   handleClickNext(e) {
@@ -53,7 +51,7 @@ class App extends React.Component {
           <button disabled={this.state.iterator <= 0} onClick={(e) => this.handleClickPrev(e)}>
             Prev
           </button>
-          <button disabled={this.state.iterator >= Object.keys(this.state.scores).length} onClick={(e) => this.handleClickNext(e)}>
+          <button disabled={this.state.iterator >= Object.keys(this.state.scores).length} onClick={(e) => this.handleClickNext(e)} >
             Next
           </button>
           <OutputForm testy={this.state} />
