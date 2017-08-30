@@ -81,6 +81,7 @@ function Totals(props) {
         <thead>
           <tr>
             <th>#</th>
+            <th>Total Points</th>
             <th>Total $</th>
             <th>President</th>
             <th>AssHole</th>
@@ -92,9 +93,11 @@ function Totals(props) {
             <td>tba</td>
             <td>tba</td>
             <td>tba</td>
+            <td>tba</td>
           </tr>
           <tr>
             <th scope="row">Mark</th>
+            <td>tba</td>
             <td>tba</td>
             <td>tba</td>
             <td>tba</td>
@@ -104,15 +107,18 @@ function Totals(props) {
             <td>tba</td>
             <td>tba</td>
             <td>tba</td>
+            <td>tba</td>
           </tr>
           <tr>
             <th scope="row">Greg</th>
             <td>tba</td>
             <td>tba</td>
             <td>tba</td>
+            <td>tba</td>
           </tr>
           <tr>
             <th scope="row">Brad</th>
+            <td>tba</td>
             <td>tba</td>
             <td>tba</td>
             <td>tba</td>
