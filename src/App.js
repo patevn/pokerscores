@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as axios from 'axios';
+import KeyBinding from 'react-keybinding-component';
 
 class App extends React.Component {
 
@@ -30,6 +31,15 @@ class App extends React.Component {
     this.serverRequest.abort();
   }
 
+ //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
+  handleKeyPressNext(e) {
+    if (e.keyCode == 32) {
+      this.setState({
+        iterator: this.state.iterator + 1
+      });
+    }
+  }
+
   handleClickNext(e) {
     this.setState({
       iterator: this.state.iterator + 1
@@ -48,6 +58,7 @@ class App extends React.Component {
     else {
       return (
         <div>
+          <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <button disabled={this.state.iterator <= 0} onClick={(e) => this.handleClickPrev(e)}>
             Prev
           </button>
