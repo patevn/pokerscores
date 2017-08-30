@@ -31,7 +31,7 @@ class App extends React.Component {
     this.serverRequest.abort();
   }
 
- //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
+  //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
   handleKeyPressNext(e) {
     if (e.keyCode == 32) {
       this.setState({
@@ -58,6 +58,7 @@ class App extends React.Component {
     else {
       return (
         <div>
+          <Totals />
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <button disabled={this.state.iterator <= 0} onClick={(e) => this.handleClickPrev(e)}>
             Prev
@@ -72,6 +73,57 @@ class App extends React.Component {
   }
 }
 
+function Totals(props) {
+
+  return (
+    <div>
+      <table className="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Total $</th>
+            <th>President</th>
+            <th>AssHole</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Matty</th>
+            <td>tba</td>
+            <td>tba</td>
+            <td>tba</td>
+          </tr>
+          <tr>
+            <th scope="row">Mark</th>
+            <td>tba</td>
+            <td>tba</td>
+            <td>tba</td>
+          </tr>
+          <tr>
+            <th scope="row">Grady</th>
+            <td>tba</td>
+            <td>tba</td>
+            <td>tba</td>
+          </tr>
+          <tr>
+            <th scope="row">Greg</th>
+            <td>tba</td>
+            <td>tba</td>
+            <td>tba</td>
+          </tr>
+          <tr>
+            <th scope="row">Brad</th>
+            <td>tba</td>
+            <td>tba</td>
+            <td>tba</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
+
 function OutputForm(props) {
 
   var results = [];
@@ -85,7 +137,7 @@ function OutputForm(props) {
 
   return (
     <div>
-      <table >
+      <table className="table table-striped">
         {
           results
         }
