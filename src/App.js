@@ -60,11 +60,11 @@ class App extends React.Component {
         <div>
           <Totals />
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
-          <button disabled={this.state.iterator <= 0} onClick={(e) => this.handleClickPrev(e)}>
+          <button className="btn btn-danger btn-cons" disabled={this.state.iterator <= 0} onClick={(e) => this.handleClickPrev(e)}>
             Prev
           </button>
-          <button disabled={this.state.iterator >= Object.keys(this.state.scores).length} onClick={(e) => this.handleClickNext(e)} >
-            Next
+          <button className="btn btn-success loading" disabled={this.state.iterator >= Object.keys(this.state.scores).length} onClick={(e) => this.handleClickNext(e)} >
+            Next 
           </button>
           <OutputForm testy={this.state} />
         </div>
