@@ -6,8 +6,8 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
-    this.handleClickNext = this.handleClickNext.bind(this)
-    this.handleClickPrev = this.handleClickPrev.bind(this)
+    this.handleClickNext = this.handleClickNext.bind(this);
+    this.handleClickPrev = this.handleClickPrev.bind(this);
 
     this.state = {
       scores: [],
@@ -46,7 +46,6 @@ class App extends React.Component {
     this.setState({
       iterator: this.state.iterator + 1
     });
-    console.log("tt");
   }
 
   handleClickPrev(e) {
@@ -63,7 +62,7 @@ class App extends React.Component {
     else {
       return (
         <div>
-          <Buttons handler={this.state} />
+          <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} />
           <OutputForm testy={this.state} />
         </div>
       );
@@ -73,22 +72,27 @@ class App extends React.Component {
 
 class Buttons extends React.Component {
 
-  // constructor(props) {
-  //   super(props);
+  constructor(props) {
+    super(props);
+    this.handleChangeNext = this.handleChangeNext.bind(this);
+    this.handleChangePrev = this.handleChangePrev.bind(this);
+  }
 
-  //   this.state = {
-  //     peter: this.props.testy1   disabled={this.state.peter.iterator >= Object.keys(this.state.peter.scores).length} 
-  //   };
-  // }
+  handleChangeNext(e) {
+    this.props.onNextClick(e.target.value);
+  }
+
+  handleChangePrev(e) {
+    this.props.onPrevClick(e.target.value);
+  }
 
   render() {
     return (
       <div>
-        {/*<KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />*/}
-        <button className="btn btn-danger btn-cons"  onClick={this.props.handler.handleClickPrev}>
+        <button className="btn btn-danger btn-cons" onClick={this.handleChangePrev}>
           Prev
           </button>
-        <button className="btn btn-success loading" onClick={this.props.handler.handleClickNext} >
+        <button className="btn btn-success loading" onClick={this.handleChangeNext} >
           Next
           </button>
       </div>
