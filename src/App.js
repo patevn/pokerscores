@@ -6,6 +6,8 @@ class App extends React.Component {
 
   constructor(props) {
     super(props);
+    this.handleClickNext = this.handleClickNext.bind(this);
+    this.handleClickPrev = this.handleClickPrev.bind(this);
 
     this.state = {
       scores: [],
@@ -58,18 +60,68 @@ class App extends React.Component {
     else {
       return (
         <div>
-          <Totals />
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
-          <button className="btn btn-danger btn-cons" disabled={this.state.iterator <= 0} onClick={(e) => this.handleClickPrev(e)}>
-            Prev
-          </button>
-          <button className="btn btn-success loading" disabled={this.state.iterator >= Object.keys(this.state.scores).length} onClick={(e) => this.handleClickNext(e)} >
-            Next 
-          </button>
+          <Totals />
+          <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
           <OutputForm testy={this.state} />
         </div>
       );
     }
+  }
+}
+
+class Buttons extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.handleChangeNext = this.handleChangeNext.bind(this);
+    this.handleChangePrev = this.handleChangePrev.bind(this);
+  }
+
+  handleChangeNext(e) {
+    this.props.onNextClick(e.target.value);
+  }
+
+  handleChangePrev(e) {
+    this.props.onPrevClick(e.target.value);
+  }
+
+  render() {
+    return (
+      <div>
+        <button className="btn btn-danger btn-cons" disabled={this.props.validation.iterator <= 0} onClick={this.handleChangePrev}>
+          Prev
+          </button>
+        <button className="btn btn-success loading" disabled={this.props.validation.iterator >= Object.keys(this.props.validation.scores).length} onClick={this.handleChangeNext} >
+          Next
+          </button>
+      </div>
+    );
+  }
+}
+
+class OutputForm extends React.Component {
+
+  render() {
+    var results = [];
+    var result = Object.values(this.props.testy.scores);
+    var i;
+
+    for (i = 0; i < this.props.testy.iterator; i++) {
+      results.push(<tbody key={result[i].id}><tr><td>{result[i].gameDate}</td><td><b>AssHole:</b>{result[i].asshole.toString()}</td><td><b>Cash Won:</b>{result[i].cashWon}</td>
+        <td><b>Position:</b>{result[i].position}</td><td><b>President:</b>{result[i].president.toString()}</td><td><b>Who:</b>{result[i].who}</td></tr></tbody>)
+    }
+
+    return (
+      <div>
+
+        <table className="table table-striped">
+          {
+            results
+          }
+        </table>
+      </div>
+    );
   }
 }
 
@@ -124,29 +176,6 @@ function Totals(props) {
             <td>tba</td>
           </tr>
         </tbody>
-      </table>
-    </div>
-  );
-}
-
-
-function OutputForm(props) {
-
-  var results = [];
-  var result = Object.values(props.testy.scores);
-  var i;
-
-  for (i = 0; i < props.testy.iterator; i++) {
-    results.push(<tbody key={result[i].id}><tr><td>{result[i].gameDate}</td><td><b>AssHole:</b>{result[i].asshole.toString()}</td><td><b>Cash Won:</b>{result[i].cashWon}</td>
-      <td><b>Position:</b>{result[i].position}</td><td><b>President:</b>{result[i].president.toString()}</td><td><b>Who:</b>{result[i].who}</td></tr></tbody>)
-  }
-
-  return (
-    <div>
-      <table className="table table-striped">
-        {
-          results
-        }
       </table>
     </div>
   );
