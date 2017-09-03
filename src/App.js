@@ -61,7 +61,6 @@ class App extends React.Component {
       return (
         <div>
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
-          <Totals />
           <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
           <OutputForm testy={this.state} />
         </div>
@@ -101,6 +100,9 @@ class Buttons extends React.Component {
 }
 
 class OutputForm extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     var results = [];
@@ -114,7 +116,7 @@ class OutputForm extends React.Component {
 
     return (
       <div>
-
+        <Totals totally={result} interator={this.props.testy.iterator} />
         <table className="table table-striped">
           {
             results
@@ -125,60 +127,100 @@ class OutputForm extends React.Component {
   }
 }
 
-function Totals(props) {
+class Totals extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <div>
-      <table className="table table-striped">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Total Points</th>
-            <th>Total $</th>
-            <th>President</th>
-            <th>AssHole</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">Matty</th>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-          </tr>
-          <tr>
-            <th scope="row">Mark</th>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-          </tr>
-          <tr>
-            <th scope="row">Grady</th>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-          </tr>
-          <tr>
-            <th scope="row">Greg</th>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-          </tr>
-          <tr>
-            <th scope="row">Brad</th>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-            <td>tba</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  );
+
+    this.state = {
+      mattyTotal: 0.00,
+      markTotal: 0.00,
+      gradyTotal: 0.00,
+      gregTotal: 0.00,
+      bradTotal: 0.00
+    };
+  }
+
+
+  componentWillReceiveProps(nextProps) {
+
+    switch (this.props.totally[this.props.interator].who) {
+      case "Matty":
+        this.state.mattyTotal += Number(this.props.totally[this.props.interator].cashWon);
+        break;
+      case "Mark":
+        this.state.markTotal += Number(this.props.totally[this.props.interator].cashWon);
+        break;
+      case "Grady":
+        this.state.gradyTotal += Number(this.props.totally[this.props.interator].cashWon);
+        break;
+      case "Greg":
+        this.state.gregTotal += Number(this.props.totally[this.props.interator].cashWon);
+        break;
+      case "Brad":
+        this.state.bradTotal += Number(this.props.totally[this.props.interator].cashWon);
+        break;
+    }
+  }
+
+  render() {
+    if (this.state == null) {
+      return null;
+    } else {
+      return (
+        <div>
+          <table className="table table-striped">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Total Points</th>
+                <th>Total $</th>
+                <th>President</th>
+                <th>AssHole</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Matty</th>
+                <td>tba</td>
+                <td>{this.state.mattyTotal}</td>
+                <td>tba</td>
+                <td>tba</td>
+              </tr>
+              <tr>
+                <th scope="row">Mark</th>
+                <td>tba</td>
+                <td>{this.state.markTotal}</td>
+                <td>tba</td>
+                <td>tba</td>
+              </tr>
+              <tr>
+                <th scope="row">Grady</th>
+                <td>tba</td>
+                <td>{this.state.gradyTotal}</td>
+                <td>tba</td>
+                <td>tba</td>
+              </tr>
+              <tr>
+                <th scope="row">Greg</th>
+                <td>tba</td>
+                <td>{this.state.gregTotal}</td>
+                <td>tba</td>
+                <td>tba</td>
+              </tr>
+              <tr>
+                <th scope="row">Brad</th>
+                <td>tba</td>
+                <td>{this.state.bradTotal}</td>
+                <td>tba</td>
+                <td>tba</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+  }
 }
 
 export default App;
