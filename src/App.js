@@ -54,16 +54,15 @@ class App extends React.Component {
     });
   }
 
-
-
   render() {
     if (this.state.scores.valueOf(0).length == 0)
       return null;
     else {
       return (
         <div>
+          <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <Totals />
-          <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state}/>
+          <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
           <OutputForm testy={this.state} />
         </div>
       );
@@ -101,8 +100,6 @@ class Buttons extends React.Component {
   }
 }
 
-
-
 class OutputForm extends React.Component {
 
   render() {
@@ -115,10 +112,9 @@ class OutputForm extends React.Component {
         <td><b>Position:</b>{result[i].position}</td><td><b>President:</b>{result[i].president.toString()}</td><td><b>Who:</b>{result[i].who}</td></tr></tbody>)
     }
 
-
     return (
       <div>
-        
+
         <table className="table table-striped">
           {
             results
@@ -184,6 +180,5 @@ function Totals(props) {
     </div>
   );
 }
-
 
 export default App;
