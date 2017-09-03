@@ -62,7 +62,8 @@ class App extends React.Component {
     else {
       return (
         <div>
-          <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} />
+          <Totals />
+          <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state}/>
           <OutputForm testy={this.state} />
         </div>
       );
@@ -89,10 +90,10 @@ class Buttons extends React.Component {
   render() {
     return (
       <div>
-        <button className="btn btn-danger btn-cons" onClick={this.handleChangePrev}>
+        <button className="btn btn-danger btn-cons" disabled={this.props.validation.iterator <= 0} onClick={this.handleChangePrev}>
           Prev
           </button>
-        <button className="btn btn-success loading" onClick={this.handleChangeNext} >
+        <button className="btn btn-success loading" disabled={this.props.validation.iterator >= Object.keys(this.props.validation.scores).length} onClick={this.handleChangeNext} >
           Next
           </button>
       </div>
@@ -117,7 +118,7 @@ class OutputForm extends React.Component {
 
     return (
       <div>
-        <Totals />
+        
         <table className="table table-striped">
           {
             results
