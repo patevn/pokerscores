@@ -36,9 +36,11 @@ class App extends React.Component {
   //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
   handleKeyPressNext(e) {
     if (e.keyCode == 32) {
-      this.setState({
-        iterator: this.state.iterator + 1
-      });
+      if (this.state.iterator < Object.keys(this.state.scores).length) {
+        this.setState({
+          iterator: this.state.iterator + 1
+        });
+      }
     }
   }
 
@@ -110,8 +112,13 @@ class OutputForm extends React.Component {
     var i;
 
     for (i = 0; i < this.props.testy.iterator; i++) {
-      results.push(<tbody key={result[i].id}><tr><td>{result[i].gameDate}</td><td><b>AssHole:</b>{result[i].asshole.toString()}</td><td><b>Cash Won:</b>{result[i].cashWon}</td>
-        <td><b>Position:</b>{result[i].position}</td><td><b>President:</b>{result[i].president.toString()}</td><td><b>Who:</b>{result[i].who}</td></tr></tbody>)
+      results.push(<tbody key={result[i].id}><tr>
+        <td>{result[i].gameDate}</td>
+        <td><b>AssHole:</b>{String(result[i].asshole)}</td>
+        <td><b>Cash Won:</b>{result[i].cashWon}</td>
+        <td><b>Position:</b>{result[i].position}</td>
+        <td><b>President:</b>{String(result[i].president)}</td>
+        <td><b>Who:</b>{result[i].who}</td></tr></tbody>)
     }
 
     return (
