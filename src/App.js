@@ -36,9 +36,11 @@ class App extends React.Component {
   //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
   handleKeyPressNext(e) {
     if (e.keyCode == 32) {
-      this.setState({
-        iterator: this.state.iterator + 1
-      });
+      if (this.state.iterator < Object.keys(this.state.scores).length) {
+        this.setState({
+          iterator: this.state.iterator + 1
+        });
+      }
     }
   }
 
