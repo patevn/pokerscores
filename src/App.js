@@ -144,7 +144,12 @@ class Totals extends React.Component {
       markTotal: 0.00,
       gradyTotal: 0.00,
       gregTotal: 0.00,
-      bradTotal: 0.00
+      bradTotal: 0.00,
+      mattyPoints: 0,
+      markPoints: 0,
+      gradyPoints: 0,
+      gregPoints: 0,
+      bradPoints: 0
     };
   }
 
@@ -154,18 +159,23 @@ class Totals extends React.Component {
     switch (this.props.totally[this.props.interator].who) {
       case "Matty":
         this.state.mattyTotal += Number(this.props.totally[this.props.interator].cashWon);
+        this.state.mattyPoints += Number(this.props.totally[this.props.interator].position);
         break;
       case "Mark":
         this.state.markTotal += Number(this.props.totally[this.props.interator].cashWon);
+        this.state.markPoints += Number(this.props.totally[this.props.interator].position);
         break;
       case "Grady":
         this.state.gradyTotal += Number(this.props.totally[this.props.interator].cashWon);
+        this.state.gradyPoints += Number(this.props.totally[this.props.interator].position);
         break;
       case "Greg":
         this.state.gregTotal += Number(this.props.totally[this.props.interator].cashWon);
+        this.state.gregPoints += Number(this.props.totally[this.props.interator].position);
         break;
       case "Brad":
         this.state.bradTotal += Number(this.props.totally[this.props.interator].cashWon);
+        this.state.bradPoints += Number(this.props.totally[this.props.interator].position);
         break;
     }
   }
@@ -189,35 +199,35 @@ class Totals extends React.Component {
             <tbody>
               <tr>
                 <th scope="row">Matty</th>
-                <td>tba</td>
+                <td>{this.state.mattyPoints}</td>
                 <td>{this.state.mattyTotal}</td>
                 <td>tba</td>
                 <td>tba</td>
               </tr>
               <tr>
                 <th scope="row">Mark</th>
-                <td>tba</td>
+                <td>{this.state.markPoints}</td>
                 <td>{this.state.markTotal}</td>
                 <td>tba</td>
                 <td>tba</td>
               </tr>
               <tr>
                 <th scope="row">Grady</th>
-                <td>tba</td>
+                <td>{this.state.gradyPoints}</td>
                 <td>{this.state.gradyTotal}</td>
                 <td>tba</td>
                 <td>tba</td>
               </tr>
               <tr>
                 <th scope="row">Greg</th>
-                <td>tba</td>
+                <td>{this.state.gregPoints}</td>
                 <td>{this.state.gregTotal}</td>
                 <td>tba</td>
                 <td>tba</td>
               </tr>
               <tr>
                 <th scope="row">Brad</th>
-                <td>tba</td>
+                <td>{this.state.bradPoints}</td>
                 <td>{this.state.bradTotal}</td>
                 <td>tba</td>
                 <td>tba</td>
