@@ -145,11 +145,25 @@ class Totals extends React.Component {
       gradyTotal: 0.00,
       gregTotal: 0.00,
       bradTotal: 0.00,
+      andoTotal: 0.00,
       mattyPoints: 0,
       markPoints: 0,
       gradyPoints: 0,
       gregPoints: 0,
-      bradPoints: 0
+      bradPoints: 0,
+      andoPoints: 0,
+      mattyAss: 0,
+      markAss: 0,
+      gradyAss: 0,
+      gregAss: 0,
+      bradAss: 0,
+      andoAss: 0,
+      mattyPres: 0,
+      markPres: 0,
+      gradyPres: 0,
+      gregPres: 0,
+      bradPres: 0,
+      andoPres: 0
     };
   }
 
@@ -160,22 +174,62 @@ class Totals extends React.Component {
       case "Matty":
         this.state.mattyTotal += Number(this.props.totally[this.props.interator].cashWon);
         this.state.mattyPoints += Number(this.props.totally[this.props.interator].position);
+        if(this.props.totally[this.props.interator].asshole == true){
+          this.state.mattyAss++;
+        }
+        if(this.props.totally[this.props.interator].president == true){
+          this.state.mattyAss++;
+        }
         break;
       case "Mark":
         this.state.markTotal += Number(this.props.totally[this.props.interator].cashWon);
         this.state.markPoints += Number(this.props.totally[this.props.interator].position);
+        if(this.props.totally[this.props.interator].asshole === true){
+          this.state.markAss++;
+        }
+        if(this.props.totally[this.props.interator].president === true){
+          this.state.mattyPres++;
+        }
         break;
       case "Grady":
         this.state.gradyTotal += Number(this.props.totally[this.props.interator].cashWon);
         this.state.gradyPoints += Number(this.props.totally[this.props.interator].position);
+        if(this.props.totally[this.props.interator].asshole === true){
+          this.state.mattyAss++;
+        }
+        if(this.props.totally[this.props.interator].president === true){
+          this.state.mattyPres++;
+        }
         break;
       case "Greg":
         this.state.gregTotal += Number(this.props.totally[this.props.interator].cashWon);
         this.state.gregPoints += Number(this.props.totally[this.props.interator].position);
+        if(this.props.totally[this.props.interator].asshole === true){
+          this.state.gregAss++;
+        }
+        if(this.props.totally[this.props.interator].president === true){
+          this.state.gregPres++;
+        }
         break;
       case "Brad":
         this.state.bradTotal += Number(this.props.totally[this.props.interator].cashWon);
         this.state.bradPoints += Number(this.props.totally[this.props.interator].position);
+        if(this.props.totally[this.props.interator].asshole === true){
+          this.state.bradAss++;
+        }
+        if(this.props.totally[this.props.interator].president === true){
+          this.state.bradPres++;
+        }
+        break;
+        case "Ando":
+        this.state.andoTotal += Number(this.props.totally[this.props.interator].cashWon);
+        this.state.andoPoints += Number(this.props.totally[this.props.interator].position);
+        if(this.props.totally[this.props.interator].asshole === true){
+          this.state.andoAss++;
+        }
+        if(this.props.totally[this.props.interator].president === true){
+          this.state.andoPres++;
+        }
         break;
     }
   }
@@ -201,36 +255,43 @@ class Totals extends React.Component {
                 <th scope="row">Matty</th>
                 <td>{this.state.mattyPoints}</td>
                 <td>{this.state.mattyTotal}</td>
-                <td>tba</td>
-                <td>tba</td>
+                <td>{this.state.mattyPres}</td>
+                <td>{this.state.mattyAss}</td>
               </tr>
               <tr>
                 <th scope="row">Mark</th>
                 <td>{this.state.markPoints}</td>
                 <td>{this.state.markTotal}</td>
-                <td>tba</td>
-                <td>tba</td>
+                <td>{this.state.markPres}</td>
+                <td>{this.state.markAss}</td>
               </tr>
               <tr>
                 <th scope="row">Grady</th>
                 <td>{this.state.gradyPoints}</td>
                 <td>{this.state.gradyTotal}</td>
-                <td>tba</td>
-                <td>tba</td>
+                <td>{this.state.gradyPres}</td>
+                <td>{this.state.gradyAss}</td>
               </tr>
               <tr>
                 <th scope="row">Greg</th>
                 <td>{this.state.gregPoints}</td>
                 <td>{this.state.gregTotal}</td>
-                <td>tba</td>
-                <td>tba</td>
+                <td>{this.state.gregPres}</td>
+                <td>{this.state.gregAss}</td>
               </tr>
               <tr>
                 <th scope="row">Brad</th>
                 <td>{this.state.bradPoints}</td>
                 <td>{this.state.bradTotal}</td>
-                <td>tba</td>
-                <td>tba</td>
+                <td>{this.state.bradPres}</td>
+                <td>{this.state.bradAss}</td>
+              </tr>
+              <tr>
+                <th scope="row">Ando</th>
+                <td>{this.state.andoPoints}</td>
+                <td>{this.state.andoTotal}</td>
+                <td>{this.state.andoPres}</td>
+                <td>{this.state.andoAss}</td>
               </tr>
             </tbody>
           </table>
