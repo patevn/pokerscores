@@ -172,8 +172,10 @@ class Totals extends React.Component {
 
     switch (this.props.totally[this.props.interator].who) {
       case "Matty":
-        this.state.mattyTotal += Number(this.props.totally[this.props.interator].cashWon);
-        this.state.mattyPoints += Number(this.props.totally[this.props.interator].position);
+        if (this.state.mattyPoints !== '6') {
+          this.state.mattyTotal += Number(this.props.totally[this.props.interator].cashWon);
+        }
+        this.state.mattyPoints += Number(this.props.totally[this.props.interator].position);        
         if(this.props.totally[this.props.interator].asshole == true){
           this.state.mattyAss++;
         }
@@ -182,8 +184,11 @@ class Totals extends React.Component {
         }
         break;
       case "Grady":
-        this.state.gradyTotal += Number(this.props.totally[this.props.interator].cashWon);
+        if (this.state.gradyPoints !== '6') {
+          this.state.gradyTotal += Number(this.props.totally[this.props.interator].cashWon);
+        }
         this.state.gradyPoints += Number(this.props.totally[this.props.interator].position);
+        
         if(this.props.totally[this.props.interator].asshole === true){
           this.state.gradyAss++;
         }
@@ -192,8 +197,10 @@ class Totals extends React.Component {
         }
         break;
       case "Greg":
-        this.state.gregTotal += Number(this.props.totally[this.props.interator].cashWon);
-        this.state.gregPoints += Number(this.props.totally[this.props.interator].position);
+        if (this.state.gregPoints !== '6') {
+          this.state.gregTotal += Number(this.props.totally[this.props.interator].cashWon);
+        }
+        this.state.gregPoints += Number(this.props.totally[this.props.interator].position);        
         if(this.props.totally[this.props.interator].asshole === true){
           this.state.gregAss++;
         }
@@ -202,8 +209,10 @@ class Totals extends React.Component {
         }
         break;
       case "Brad":
-        this.state.bradTotal += Number(this.props.totally[this.props.interator].cashWon);
-        this.state.bradPoints += Number(this.props.totally[this.props.interator].position);
+        if (this.state.bradPoints !== '6') {
+          this.state.bradTotal += Number(this.props.totally[this.props.interator].cashWon);
+        }
+        this.state.bradPoints += Number(this.props.totally[this.props.interator].position);        
         if(this.props.totally[this.props.interator].asshole === true){
           this.state.bradAss++;
         }
@@ -211,9 +220,11 @@ class Totals extends React.Component {
           this.state.bradPres++;
         }
         break;
-        case "Ando":
-        this.state.andoTotal += Number(this.props.totally[this.props.interator].cashWon);
-        this.state.andoPoints += Number(this.props.totally[this.props.interator].position);
+      case "Ando":
+        if (this.state.andoPoints !== '6') {
+          this.state.andoTotal += Number(this.props.totally[this.props.interator].cashWon);
+        }
+        this.state.andoPoints += Number(this.props.totally[this.props.interator].position);        
         if(this.props.totally[this.props.interator].asshole === true){
           this.state.andoAss++;
         }
