@@ -178,17 +178,17 @@ class Totals extends React.Component {
           this.state.mattyAss++;
         }
         if(this.props.totally[this.props.interator].president == true){
-          this.state.mattyAss++;
+          this.state.mattyPres++;
         }
         break;
       case "Grady":
         this.state.gradyTotal += Number(this.props.totally[this.props.interator].cashWon);
         this.state.gradyPoints += Number(this.props.totally[this.props.interator].position);
         if(this.props.totally[this.props.interator].asshole === true){
-          this.state.mattyAss++;
+          this.state.gradyAss++;
         }
         if(this.props.totally[this.props.interator].president === true){
-          this.state.mattyPres++;
+          this.state.gradyPres++;
         }
         break;
       case "Greg":
