@@ -92,7 +92,7 @@ class Buttons extends React.Component {
   render() {
     return (
       <div>
-        <button className="btn btn-danger btn-cons" disabled={this.props.validation.iterator <= 0} onClick={this.handleChangePrev}>
+        <button className="btn btn-danger btn-cons" disabled={true} onClick={this.handleChangePrev}>
           Prev
           </button>
         <button className="btn btn-success loading" disabled={this.props.validation.iterator >= Object.keys(this.props.validation.scores).length} onClick={this.handleChangeNext} >
