@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import * as axios from 'axios';
 import KeyBinding from 'react-keybinding-component';
+import moment from 'moment';
+import sortBy from "lodash/sortBy";
+
 
 class App extends React.Component {
 
@@ -13,7 +16,6 @@ class App extends React.Component {
       scores: [],
       iterator: 0
     };
-
     var _this = this;
     this.serverRequest =
       axios
@@ -111,19 +113,21 @@ class OutputForm extends React.Component {
     var result = Object.values(this.props.testy.scores);
     var i;
 
+    var sorted = sortBy(result, function(o) { return new moment(o.gameDate); });
+
     for (i = 0; i < this.props.testy.iterator; i++) {
-      results.push(<tbody key={result[i].id}><tr>
-        <td>{result[i].gameDate}</td>
-        <td><b>AssHole:</b>{String(result[i].asshole)}</td>
-        <td><b>Cash Won:</b>{result[i].cashWon}</td>
-        <td><b>Position:</b>{result[i].position}</td>
-        <td><b>President:</b>{String(result[i].president)}</td>
-        <td><b>Who:</b>{result[i].who}</td></tr></tbody>)
+      results.push(<tbody key={sorted[i].id}><tr>
+        <td>{sorted[i].gameDate}</td>
+        <td><b>AssHole:</b>{String(sorted[i].asshole)}</td>
+        <td><b>Cash Won:</b>{sorted[i].cashWon}</td>
+        <td><b>Position:</b>{sorted[i].position}</td>
+        <td><b>President:</b>{String(sorted[i].president)}</td>
+        <td><b>Who:</b>{sorted[i].who}</td></tr></tbody>)
     }
 
     return (
       <div>
-        <Totals totally={result} interator={this.props.testy.iterator} />
+        <Totals totally={sorted} interator={this.props.testy.iterator} />
         <table className="table table-striped">
           {
             results
