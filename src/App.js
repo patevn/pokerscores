@@ -145,25 +145,21 @@ class Totals extends React.Component {
 
     this.state = {
       mattyTotal: 0.00,
-      markTotal: 0.00,
       gradyTotal: 0.00,
       gregTotal: 0.00,
       bradTotal: 0.00,
       andoTotal: 0.00,
       mattyPoints: 0,
-      markPoints: 0,
       gradyPoints: 0,
       gregPoints: 0,
       bradPoints: 0,
       andoPoints: 0,
       mattyAss: 0,
-      markAss: 0,
       gradyAss: 0,
       gregAss: 0,
       bradAss: 0,
       andoAss: 0,
       mattyPres: 0,
-      markPres: 0,
       gradyPres: 0,
       gregPres: 0,
       bradPres: 0,
@@ -183,16 +179,6 @@ class Totals extends React.Component {
         }
         if(this.props.totally[this.props.interator].president == true){
           this.state.mattyAss++;
-        }
-        break;
-      case "Mark":
-        this.state.markTotal += Number(this.props.totally[this.props.interator].cashWon);
-        this.state.markPoints += Number(this.props.totally[this.props.interator].position);
-        if(this.props.totally[this.props.interator].asshole === true){
-          this.state.markAss++;
-        }
-        if(this.props.totally[this.props.interator].president === true){
-          this.state.mattyPres++;
         }
         break;
       case "Grady":
@@ -261,13 +247,6 @@ class Totals extends React.Component {
                 <td>{this.state.mattyTotal}</td>
                 <td>{this.state.mattyPres}</td>
                 <td>{this.state.mattyAss}</td>
-              </tr>
-              <tr>
-                <th scope="row">Mark</th>
-                <td>{this.state.markPoints}</td>
-                <td>{this.state.markTotal}</td>
-                <td>{this.state.markPres}</td>
-                <td>{this.state.markAss}</td>
               </tr>
               <tr>
                 <th scope="row">Grady</th>
