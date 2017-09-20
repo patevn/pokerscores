@@ -55,15 +55,22 @@ class App extends React.Component {
   handleClickPrev(e) {
     this.setState({
       iterator: this.state.iterator - 1
-    });
+    }); 
   }
 
+  chunker(arr, chunkSize) {
+    let R = [];
+    for (let i=0,len=arr.length; i<len; i+=chunkSize)
+      R.push(arr.slice(i,i+chunkSize));
+    return R;
+  }
 
   render() {
     
-    
-    var result = Object.values(this.state.scores);
-    var sorted = sortBy(result, function(o) { return new moment(o.gameDate); });
+    //sorting and chunking array up into lots of 5
+    let sorted = sortBy(this.state.scores, function(o) { return new moment(o.gameDate); });
+    let chunks = this.chunker(sorted, 5);
+    let chunk = chunks[this.state.iterator];
 
     if (this.state.scores.valueOf(0).length == 0)
       return null;
@@ -73,7 +80,7 @@ class App extends React.Component {
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <Totals />
           <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
-          <OutputForm testy={sorted} />
+          <OutputForm testy={chunk} />
         </div>
       );
     }
