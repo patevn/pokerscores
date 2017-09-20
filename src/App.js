@@ -102,34 +102,17 @@ class Buttons extends React.Component {
   }
 }
 
-class OutputForm extends React.Component {
+function OutputForm(props) {
+  var result = Object.values(props.testy.scores);
+  var i;
 
-  render() {
-    var results = [];
-    var result = Object.values(this.props.testy.scores);
-    var i;
-
-    for (i = 0; i < this.props.testy.iterator; i++) {
-      results.push(<tbody key={result[i].id}><tr>
-        <td>{result[i].gameDate}</td>
-        <td><b>AssHole:</b>{String(result[i].asshole)}</td>
-        <td><b>Cash Won:</b>{result[i].cashWon}</td>
-        <td><b>Position:</b>{result[i].position}</td>
-        <td><b>President:</b>{String(result[i].president)}</td>
-        <td><b>Who:</b>{result[i].who}</td></tr></tbody>)
-    }
-
-    return (
-      <div>
-
-        <table className="table table-striped">
-          {
-            results
-          }
-        </table>
-      </div>
-    );
-  }
+  return (
+    <ul >
+      { /* Render the list of scores */
+        result.map((score, index) => <li key={index}>{score.gameDate} <b>AssHole:</b> {score.asshole} <b>Cash Won:</b> {score.cashWon} <b>Position:</b> {score.position} <b>President:</b> {score.president} <b>Who:</b> {score.who}</li>)
+      }
+    </ul >
+  );
 }
 
 function Totals(props) {
