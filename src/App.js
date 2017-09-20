@@ -104,7 +104,6 @@ class Buttons extends React.Component {
 
 function OutputForm(props) {
   var result = Object.values(props.testy.scores);
-  var i;
 
   return (
     <ul >
