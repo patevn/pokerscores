@@ -1,6 +1,8 @@
 import React from 'react';
 import * as axios from 'axios';
 import KeyBinding from 'react-keybinding-component';
+import moment from 'moment';
+import sortBy from "lodash/sortBy";
 
 class App extends React.Component {
 
@@ -43,20 +45,26 @@ class App extends React.Component {
       }
     }
   }
-
+  
   handleClickNext(e) {
     this.setState({
       iterator: this.state.iterator + 1
     });
   }
-
+  
   handleClickPrev(e) {
     this.setState({
       iterator: this.state.iterator - 1
     });
   }
 
+
   render() {
+    
+    
+    var result = Object.values(this.state.scores);
+    var sorted = sortBy(result, function(o) { return new moment(o.gameDate); });
+
     if (this.state.scores.valueOf(0).length == 0)
       return null;
     else {
@@ -65,7 +73,7 @@ class App extends React.Component {
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <Totals />
           <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
-          <OutputForm testy={this.state} />
+          <OutputForm testy={sorted} />
         </div>
       );
     }
@@ -103,12 +111,11 @@ class Buttons extends React.Component {
 }
 
 function OutputForm(props) {
-  var result = Object.values(props.testy.scores);
 
   return (
     <ul >
       {
-        result.map((score, index) => <li key={index}>{score.gameDate} 
+        props.testy.map((score, index) => <li key={index}>{score.gameDate} 
           <b>AssHole:</b> {score.asshole} 
           <b>Cash Won:</b> {score.cashWon} 
           <b>Position:</b> {score.position} 
