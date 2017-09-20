@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import * as axios from 'axios';
 import KeyBinding from 'react-keybinding-component';
 
@@ -107,8 +107,13 @@ function OutputForm(props) {
 
   return (
     <ul >
-      { /* Render the list of scores */
-        result.map((score, index) => <li key={index}>{score.gameDate} <b>AssHole:</b> {score.asshole} <b>Cash Won:</b> {score.cashWon} <b>Position:</b> {score.position} <b>President:</b> {score.president} <b>Who:</b> {score.who}</li>)
+      {
+        result.map((score, index) => <li key={index}>{score.gameDate} 
+          <b>AssHole:</b> {score.asshole} 
+          <b>Cash Won:</b> {score.cashWon} 
+          <b>Position:</b> {score.position} 
+          <b>President:</b> {score.president} 
+          <b>Who:</b> {score.who}</li>)
       }
     </ul >
   );
