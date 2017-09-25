@@ -45,30 +45,29 @@ class App extends React.Component {
       }
     }
   }
-  
+
   handleClickNext(e) {
     this.setState({
       iterator: this.state.iterator + 1
     });
   }
-  
+
   handleClickPrev(e) {
     this.setState({
       iterator: this.state.iterator - 1
-    }); 
+    });
   }
 
   chunker(arr, chunkSize) {
     let R = [];
-    for (let i=0,len=arr.length; i<len; i+=chunkSize)
-      R.push(arr.slice(i,i+chunkSize));
+    for (let i = 0, len = arr.length; i < len; i += chunkSize)
+      R.push(arr.slice(i, i + chunkSize));
     return R;
   }
 
   render() {
-    
     //sorting and chunking array up into lots of 5
-    let sorted = sortBy(this.state.scores, function(o) { return new moment(o.gameDate); });
+    let sorted = sortBy(this.state.scores, function (o) { return new moment(o.gameDate); });
     let chunks = this.chunker(sorted, 5);
     let chunk = chunks[this.state.iterator];
 
@@ -122,11 +121,11 @@ function OutputForm(props) {
   return (
     <ul >
       {
-        props.testy.map((score, index) => <li key={index}>{score.gameDate} 
-          <b>AssHole:</b> {score.asshole} 
-          <b>Cash Won:</b> {score.cashWon} 
-          <b>Position:</b> {score.position} 
-          <b>President:</b> {score.president} 
+        props.testy.map((score, index) => <li key={index}>{score.gameDate}
+          <b>AssHole:</b> {score.asshole}
+          <b>Cash Won:</b> {score.cashWon}
+          <b>Position:</b> {score.position}
+          <b>President:</b> {score.president}
           <b>Who:</b> {score.who}</li>)
       }
     </ul >
