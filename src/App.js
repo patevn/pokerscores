@@ -26,6 +26,22 @@ class App extends React.Component {
           _this.setState({
             scores: result.data
           });
+        }).then(function (result) {
+          let sort = sortBy(_this.state.scores, function (o) { return new moment(o.gameDate); });
+          let chunks = chunker(sort, 5);
+
+          function chunker(arr, chunkSize) {
+            let R = [];
+            for (let i = 0, len = arr.length; i < len; i += chunkSize)
+              R.push(arr.slice(i, i + chunkSize));
+            return R;
+          }
+          _this.setState({
+            chunks: chunks
+          });
+          _this.setState({
+            chunkLength: chunks.length
+          });
         }).catch(function (error) {
           console.log(error);
         });
@@ -33,6 +49,9 @@ class App extends React.Component {
 
   componentWillUnmount() {
     this.serverRequest.abort();
+  }
+
+  componentDidMount() {
   }
 
   //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
@@ -66,20 +85,17 @@ class App extends React.Component {
   }
 
   render() {
-    //sorting and chunking array up into lots of 5
-    let sorted = sortBy(this.state.scores, function (o) { return new moment(o.gameDate); });
-    let chunks = this.chunker(sorted, 5);
-    let chunk = chunks[this.state.iterator];
-
     if (this.state.scores.valueOf(0).length == 0)
       return null;
     else {
+      //next thing to do is get chunk passing back down to OutputForm
+      // let chunk = this.state.chunks[this.state.iterator];
       return (
         <div>
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <Totals />
           <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
-          <OutputForm testy={chunk} />
+          <OutputForm testy={this.state} />
         </div>
       );
     }
@@ -120,14 +136,14 @@ function OutputForm(props) {
 
   return (
     <ul >
-      {
+      {/* {
         props.testy.map((score, index) => <li key={index}>{score.gameDate}
           <b>AssHole:</b> {score.asshole}
           <b>Cash Won:</b> {score.cashWon}
           <b>Position:</b> {score.position}
           <b>President:</b> {score.president}
           <b>Who:</b> {score.who}</li>)
-      }
+      } */}
     </ul >
   );
 }
