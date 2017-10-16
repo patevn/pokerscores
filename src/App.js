@@ -123,7 +123,7 @@ class Buttons extends React.Component {
         <button className="btn btn-danger btn-cons" disabled={this.props.validation.iterator <= 0} onClick={this.handleChangePrev}>
           Prev
           </button>
-        <button className="btn btn-success loading" disabled={this.props.validation.iterator >= Object.keys(this.props.validation.scores).length} onClick={this.handleChangeNext} >
+        <button className="btn btn-success loading" disabled={this.props.validation.iterator >= this.props.validation.chunks.length} onClick={this.handleChangeNext} >
           Next
           </button>
       </div>
@@ -133,6 +133,8 @@ class Buttons extends React.Component {
 
 function OutputForm(props) {
 
+  if ((props.week == undefined) || (props.week.length !== 5))
+    return null;
   return (
     <ul >
       {
