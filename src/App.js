@@ -57,7 +57,7 @@ class App extends React.Component {
   //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
   handleKeyPressNext(e) {
     if (e.keyCode == 32) {
-      if (this.state.iterator < Object.keys(this.state.scores).length) {
+      if (this.state.iterator < this.state.chunks.length) {
         this.setState({
           iterator: this.state.iterator + 1
         });
@@ -66,9 +66,11 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    this.setState({
-      iterator: this.state.iterator + 1
-    });
+    if (this.state.iterator < this.state.chunks.length) {
+      this.setState({
+        iterator: this.state.iterator + 1
+      });
+    }
   }
 
   handleClickPrev(e) {
@@ -132,7 +134,7 @@ class Buttons extends React.Component {
 
 function OutputForm(props) {
 
-  if ((props.week == undefined) || (props.week.length !== 5))
+  if ((props.week == undefined))
     return null;
   return (
     <ul >
