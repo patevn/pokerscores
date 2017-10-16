@@ -15,45 +15,45 @@ class App extends React.Component {
       scores: [],
       iterator: 0
     };
-
+    
     var _this = this;
     this.serverRequest =
-      axios
-        .get('https://pokerscores-a9da7.firebaseio.com/scores.json')
-        .then(function (result) {
-          console.log(result.data);
-          console.log(result.status);
-          _this.setState({
-            scores: result.data
-          });
-        }).then(function (result) {
-          let sort = sortBy(_this.state.scores, function (o) { return new moment(o.gameDate); });
-          let chunks = chunker(sort, 5);
-
-          function chunker(arr, chunkSize) {
-            let R = [];
-            for (let i = 0, len = arr.length; i < len; i += chunkSize)
-              R.push(arr.slice(i, i + chunkSize));
-            return R;
-          }
-          _this.setState({
-            chunks: chunks
-          });
-          _this.setState({
-            chunkLength: chunks.length
-          });
-        }).catch(function (error) {
-          console.log(error);
-        });
+    axios
+    .get('https://pokerscores-a9da7.firebaseio.com/scores.json')
+    .then(function (result) {
+      console.log(result.data);
+      console.log(result.status);
+      _this.setState({
+        scores: result.data
+      });
+    }).then(function (result) {
+      let sort = sortBy(_this.state.scores, function (o) { return new moment(o.gameDate); });
+      let chunks = chunker(sort, 5);
+      
+      function chunker(arr, chunkSize) {
+        let R = [];
+        for (let i = 0, len = arr.length; i < len; i += chunkSize)
+          R.push(arr.slice(i, i + chunkSize));
+        return R;
+      }
+      _this.setState({
+        chunks: chunks
+      });
+      _this.setState({
+        chunkLength: chunks.length
+      });
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
-
+  
   componentWillUnmount() {
     this.serverRequest.abort();
   }
-
+  
   componentDidMount() {
   }
-
+  
   //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
   handleKeyPressNext(e) {
     if (e.keyCode == 32) {
@@ -64,38 +64,37 @@ class App extends React.Component {
       }
     }
   }
-
+  
   handleClickNext(e) {
     this.setState({
       iterator: this.state.iterator + 1
     });
   }
-
+  
   handleClickPrev(e) {
     this.setState({
       iterator: this.state.iterator - 1
     });
   }
-
+  
   chunker(arr, chunkSize) {
     let R = [];
     for (let i = 0, len = arr.length; i < len; i += chunkSize)
       R.push(arr.slice(i, i + chunkSize));
     return R;
   }
-
+  
   render() {
-    if (this.state.scores.valueOf(0).length == 0)
+    if (this.state.chunks == undefined)
       return null;
     else {
       //next thing to do is get chunk passing back down to OutputForm
-      // let chunk = this.state.chunks[this.state.iterator];
       return (
         <div>
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
-          <Totals />
+            <Totals />
           <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
-          <OutputForm testy={this.state} />
+          <OutputForm week={this.state.chunks[this.state.iterator]} />
         </div>
       );
     }
@@ -136,14 +135,14 @@ function OutputForm(props) {
 
   return (
     <ul >
-      {/* {
-        props.testy.map((score, index) => <li key={index}>{score.gameDate}
+      {
+        props.week.map((score, index) => <li key={index}>{score.gameDate}
           <b>AssHole:</b> {score.asshole}
           <b>Cash Won:</b> {score.cashWon}
           <b>Position:</b> {score.position}
           <b>President:</b> {score.president}
           <b>Who:</b> {score.who}</li>)
-      } */}
+      }
     </ul >
   );
 }
