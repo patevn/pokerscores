@@ -26,6 +26,22 @@ class App extends React.Component {
           _this.setState({
             scores: result.data
           });
+        }).then(function (result) {
+          let sort = sortBy(_this.state.scores, function (o) { return new moment(o.gameDate); });
+          let chunks = chunker(sort, 5);
+
+          function chunker(arr, chunkSize) {
+            let R = [];
+            for (let i = 0, len = arr.length; i < len; i += chunkSize)
+              R.push(arr.slice(i, i + chunkSize));
+            return R;
+          }
+          _this.setState({
+            chunks: chunks
+          });
+          _this.setState({
+            chunkLength: chunks.length
+          });
         }).catch(function (error) {
           console.log(error);
         });
@@ -35,10 +51,13 @@ class App extends React.Component {
     this.serverRequest.abort();
   }
 
+  componentDidMount() {
+  }
+
   //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
   handleKeyPressNext(e) {
     if (e.keyCode == 32) {
-      if (this.state.iterator < Object.keys(this.state.scores).length) {
+      if (this.state.iterator < this.state.chunks.length) {
         this.setState({
           iterator: this.state.iterator + 1
         });
@@ -47,9 +66,11 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    this.setState({
-      iterator: this.state.iterator + 1
-    });
+    if (this.state.iterator < this.state.chunks.length) {
+      this.setState({
+        iterator: this.state.iterator + 1
+      });
+    }
   }
 
   handleClickPrev(e) {
@@ -66,12 +87,7 @@ class App extends React.Component {
   }
 
   render() {
-    //sorting and chunking array up into lots of 5
-    let sorted = sortBy(this.state.scores, function (o) { return new moment(o.gameDate); });
-    let chunks = this.chunker(sorted, 5);
-    let chunk = chunks[this.state.iterator];
-
-    if (this.state.scores.valueOf(0).length == 0)
+    if (this.state.chunks == undefined)
       return null;
     else {
       return (
@@ -79,7 +95,7 @@ class App extends React.Component {
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <Totals />
           <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
-          <OutputForm testy={chunk} />
+          <OutputForm week={this.state.chunks[this.state.iterator]} />
         </div>
       );
     }
@@ -108,7 +124,7 @@ class Buttons extends React.Component {
         <button className="btn btn-danger btn-cons" disabled={this.props.validation.iterator <= 0} onClick={this.handleChangePrev}>
           Prev
           </button>
-        <button className="btn btn-success loading" disabled={this.props.validation.iterator >= Object.keys(this.props.validation.scores).length} onClick={this.handleChangeNext} >
+        <button className="btn btn-success loading" disabled={this.props.validation.iterator >= this.props.validation.chunks.length} onClick={this.handleChangeNext} >
           Next
           </button>
       </div>
@@ -118,10 +134,12 @@ class Buttons extends React.Component {
 
 function OutputForm(props) {
 
+  if ((props.week == undefined))
+    return null;
   return (
     <ul >
       {
-        props.testy.map((score, index) => <li key={index}>{score.gameDate}
+        props.week.map((score, index) => <li key={index}>{score.gameDate}
           <b>AssHole:</b> {score.asshole}
           <b>Cash Won:</b> {score.cashWon}
           <b>Position:</b> {score.position}
