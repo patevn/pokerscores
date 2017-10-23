@@ -95,7 +95,7 @@ class App extends React.Component {
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <Totals />
           <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
-          <OutputForm week={this.state.chunks[this.state.iterator]} />
+          <OutputForm week={this.state} />
         </div>
       );
     }
@@ -137,16 +137,20 @@ function OutputForm(props) {
   if ((props.week == undefined))
     return null;
   return (
-    <ul >
+    <table key={props.week.iterator}>
       {
-        props.week.map((score, index) => <li key={index}>{score.gameDate}
-          <b>AssHole:</b> {score.asshole}
-          <b>Cash Won:</b> {score.cashWon}
-          <b>Position:</b> {score.position}
-          <b>President:</b> {score.president}
-          <b>Who:</b> {score.who}</li>)
+        props.week.chunks[props.week.iterator].map((score, index) =>
+          <tbody key={index}><tr>
+            <td>{score.gameDate}</td>
+            <td><b>AssHole:</b>{score.asshole}</td>
+            <td><b>Cash Won:</b>{score.cashWon}</td>
+            <td><b>Position:</b>{score.position}</td>
+            <td><b>President:</b>{score.president}</td>
+            <td><b>Who:</b>{score.who}</td>
+          </tr></tbody>
+        )
       }
-    </ul >
+    </table >
   );
 }
 
