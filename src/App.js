@@ -57,7 +57,7 @@ class App extends React.Component {
   //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
   handleKeyPressNext(e) {
     if (e.keyCode == 32) {
-      if (this.state.iterator < this.state.chunks.length) {
+      if (this.state.iterator < (this.state.chunks.length - 1)) {
         this.setState({
           iterator: this.state.iterator + 1
         });
@@ -66,7 +66,7 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    if (this.state.iterator < this.state.chunks.length) {
+    if (this.state.iterator < (this.state.chunks.length - 1)) {
       this.setState({
         iterator: this.state.iterator + 1
       });
@@ -124,7 +124,7 @@ class Buttons extends React.Component {
         <button className="btn btn-danger btn-cons" disabled={this.props.validation.iterator <= 0} onClick={this.handleChangePrev}>
           Prev
           </button>
-        <button className="btn btn-success loading" disabled={this.props.validation.iterator >= this.props.validation.chunks.length} onClick={this.handleChangeNext} >
+        <button className="btn btn-success loading" disabled={this.props.validation.iterator > (this.props.validation.chunks.length - 2)} onClick={this.handleChangeNext} >
           Next
           </button>
       </div>
