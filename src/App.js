@@ -57,7 +57,7 @@ class App extends React.Component {
   //TODO: hate this solution but it works. we shoulnd't need to call a whole new function for keypress. Will use for now so i can move on
   handleKeyPressNext(e) {
     if (e.keyCode == 32) {
-      if (this.state.iterator < this.state.chunks.length) {
+      if (this.state.iterator < (this.state.chunks.length - 1)) {
         this.setState({
           iterator: this.state.iterator + 1
         });
@@ -66,7 +66,7 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    if (this.state.iterator < this.state.chunks.length) {
+    if (this.state.iterator < (this.state.chunks.length - 1)) {
       this.setState({
         iterator: this.state.iterator + 1
       });
@@ -95,7 +95,7 @@ class App extends React.Component {
           <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
           <Totals />
           <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
-          <OutputForm week={this.state.chunks[this.state.iterator]} />
+          <OutputForm week={this.state} />
         </div>
       );
     }
@@ -124,7 +124,7 @@ class Buttons extends React.Component {
         <button className="btn btn-danger btn-cons" disabled={this.props.validation.iterator <= 0} onClick={this.handleChangePrev}>
           Prev
           </button>
-        <button className="btn btn-success loading" disabled={this.props.validation.iterator >= this.props.validation.chunks.length} onClick={this.handleChangeNext} >
+        <button className="btn btn-success loading" disabled={this.props.validation.iterator > (this.props.validation.chunks.length - 2)} onClick={this.handleChangeNext} >
           Next
           </button>
       </div>
@@ -137,16 +137,20 @@ function OutputForm(props) {
   if ((props.week == undefined))
     return null;
   return (
-    <ul >
+    <table key={props.week.iterator}>
       {
-        props.week.map((score, index) => <li key={index}>{score.gameDate}
-          <b>AssHole:</b> {score.asshole}
-          <b>Cash Won:</b> {score.cashWon}
-          <b>Position:</b> {score.position}
-          <b>President:</b> {score.president}
-          <b>Who:</b> {score.who}</li>)
+        props.week.chunks[props.week.iterator].map((score, index) =>
+          <tbody key={index}><tr>
+            <td>{score.gameDate}</td>
+            <td><b>AssHole:</b>{String(score.asshole)}</td>
+            <td><b>Cash Won:</b>{score.cashWon}</td>
+            <td><b>Position:</b>{score.position}</td>
+            <td><b>President:</b>{String(score.president)}</td>
+            <td><b>Who:</b>{score.who}</td>
+          </tr></tbody>
+        )
       }
-    </ul >
+    </table >
   );
 }
 
