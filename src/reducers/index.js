@@ -1,0 +1,1 @@
+//this is the root reducer, its required when you have more than one reducer (which we will soon)
