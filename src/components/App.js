@@ -3,11 +3,13 @@ import * as axios from 'axios';
 import KeyBinding from 'react-keybinding-component';
 import moment from 'moment';
 import sortBy from "lodash/sortBy";
+import { connect } from 'react-redux';
+import * as trackerActions from '../actions/trackerActions.js';
 
 class App extends React.Component {
 
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.handleClickNext = this.handleClickNext.bind(this);
     this.handleClickPrev = this.handleClickPrev.bind(this);
 
@@ -66,11 +68,7 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    if (this.state.iterator < (this.state.chunks.length - 1)) {
-      this.setState({
-        iterator: this.state.iterator + 1
-      });
-    }
+    this.props.dispatch(trackerActions.redo(this.state.iterator));
   }
 
   handleClickPrev(e) {
@@ -210,4 +208,11 @@ function Totals(props) {
   );
 }
 
-export default App;
+//this returns the props we will use on our component
+function mapStateToProps(state, ownProps) {
+  return {
+    iterator: state.iterator
+  };
+}
+
+export default connect(mapStateToProps)(App);

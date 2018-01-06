@@ -1,1 +1,2 @@
-//this will hold all my action constants
+export const UNDO = 'UNDO'
+export const REDO = 'REDO'
