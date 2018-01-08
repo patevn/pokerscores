@@ -10,6 +10,9 @@ export default function trackerReducer(state, action) {
     case types.REDO:
       return [...state, Object.assign({}, (action.iterator++))
       ];
+    case types.LOAD:
+      return [...state, Object.assign({}, action.result)
+      ];
     default:
       return state;
   }

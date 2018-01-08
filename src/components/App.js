@@ -1,10 +1,10 @@
 import React from 'react';
-import * as axios from 'axios';
 import KeyBinding from 'react-keybinding-component';
 import moment from 'moment';
 import sortBy from "lodash/sortBy";
 import { connect } from 'react-redux';
 import * as trackerActions from '../actions/trackerActions.js';
+import * as axios from 'axios';
 
 class App extends React.Component {
 
