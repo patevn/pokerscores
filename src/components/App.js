@@ -1,8 +1,6 @@
 import React from 'react';
-import KeyBinding from 'react-keybinding-component';
 import { connect } from 'react-redux';
 import * as trackerActions from '../actions/trackerActions.js';
-import * as axios from 'axios';
 
 class App extends React.Component {
 
@@ -30,9 +28,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <KeyBinding onKey={(e) => this.handleKeyPressNext(e)} />
         <Totals total={this.props} />
-        <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} validation={this.state} />
+        <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} />
         <OutputForm week={this.props} />
       </div>
     );
@@ -70,8 +67,7 @@ class Buttons extends React.Component {
 }
 
 function OutputForm(props) {
-
-  if ((props.week.data == undefined))
+  if ((props.week.data === undefined))
     return null;
   return (
     <table key={props.week.iterator.length}>

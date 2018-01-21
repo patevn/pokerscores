@@ -2,19 +2,17 @@ import * as types from '../actions/actionTypes';
 import moment from 'moment';
 import sortBy from "lodash/sortBy";
 
-export default function iteratorReducer(state, action) {
+export default function initReducer(state, action) {
   if (state == null)
     state = [];
   switch (action.type) {
     case types.LOAD:
-      // think ...state is wrong
       return [...state, Object.assign({}, chunker(action.result.data))
       ];
     default:
       return state;
   }
 }
-
 
 let chunker = function (data) {
   let sort = sortBy(data, function (o) { return new moment(o.gameDate); });
