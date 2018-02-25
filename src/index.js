@@ -10,6 +10,7 @@ import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import reduxImmutableStateInvariant from 'redux-immutable-state-invariant';
 import thunk from 'redux-thunk';
+import logger from 'redux-logger';
 
 const initialState = configureStore();
 initialState.dispatch(loadData());
@@ -19,7 +20,7 @@ export default function configureStore(initialState) {
     return createStore(
         rootReducer,
         initialState,
-        applyMiddleware(thunk, reduxImmutableStateInvariant())
+        applyMiddleware(thunk, reduxImmutableStateInvariant(), logger)
     );
 }
 
