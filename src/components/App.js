@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as trackerActions from '../actions/trackerActions.js';
+import * as initActions from '../actions/initActions.js';
 
 class App extends React.Component {
 
@@ -18,11 +18,13 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    this.props.dispatch(trackerActions.redo(this.props.iterator));
+      this.props.dispatch(initActions.redo(this.props));
   }
 
   handleClickPrev(e) {
-    this.props.dispatch(trackerActions.undo(this.props.iterator));
+    if (this.props.iterator >= 1) {
+      this.props.dispatch(initActions.undo(this.props));
+    }
   }
 
   render() {
@@ -67,12 +69,12 @@ class Buttons extends React.Component {
 }
 
 function OutputForm(props) {
-  if ((props.week.data === undefined))
+  if ((props.week.currentData === undefined || props.week.currentData === null))
     return null;
   return (
-    <table key={props.week.iterator.length}>
+    <table key={props.week.iterator}>
       {
-        props.week.data[props.week.iterator.length].map((score, index) =>
+        props.week.currentData.map((score, index) =>
           <tbody key={index}><tr>
             <td>{score.gameDate}</td>
             <td><b>AssHole:</b>{String(score.asshole)}</td>
@@ -93,7 +95,7 @@ function Totals(props) {
       <table className="table table-striped">
         <thead>
           <tr>
-            <th>{props.total.iterator.length}</th>
+            <th>#</th>
             <th>Total Points</th>
             <th>Total $</th>
             <th>President</th>
@@ -145,8 +147,8 @@ function Totals(props) {
 //this returns the props we will use on our component
 function mapStateToProps(state, ownProps) {
   return {
-    iterator: state.iterator,
-    data: state.data[0]
+    iterator: state.kassie.iterator,
+    currentData: state.kassie.currentData
   };
 }
 
