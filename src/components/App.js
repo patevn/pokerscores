@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as initActions from '../actions/initActions.js';
+import * as totalsActions from '../actions/totalsActions.js';
 
 class App extends React.Component {
 
@@ -18,7 +19,7 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-      this.props.dispatch(initActions.redo(this.props));
+    this.props.dispatch(initActions.redo(this.props), totalsActions.calc(this.props));
   }
 
   handleClickPrev(e) {
