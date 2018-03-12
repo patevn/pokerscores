@@ -13,8 +13,8 @@ export default function initReducer(state = {
   switch (action.type) {
     case types.LOAD:
       let chunks = chunker(action.result.data);
-      // let total1z = calculator(chunks[0]) , totals: total1z
-      return Object.assign({}, state, { data: chunks, currentData: chunks[0] })
+      let total1z = initCalculator(chunks[0])
+      return Object.assign({}, state, { data: chunks, currentData: chunks[0], totals: total1z })
     case types.REDO:
       let next = state.iterator + 1
       return Object.assign({}, state, { currentData: state.data[next], iterator: next })
@@ -27,6 +27,29 @@ export default function initReducer(state = {
     default:
       return state;
   }
+}
+
+//TODO: prob a better solution then a seperate initCalc, will card it up
+function initCalculator(fwd) {
+  let totals = totalTemplate.setup();
+  fwd.forEach(element => {
+    if (element.who === "Matty") {
+      totals.Matty.cashWon = round(Number(element.cashWon));
+    }
+    if (element.who === "Ando") {
+      totals.Ando.cashWon = round(Number(element.cashWon));
+    }
+    if (element.who === "Grady") {
+      totals.Grady.cashWon = round(Number(element.cashWon));
+    }
+    if (element.who === "Greg") {
+      totals.Greg.cashWon = round(Number(element.cashWon));
+    }
+    if (element.who === "Brad") {
+      totals.Brad.cashWon = round(Number(element.cashWon));
+    }
+  });
+  return totals;
 }
 
 function calculator(fwd) {
