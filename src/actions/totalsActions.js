@@ -1,5 +1,5 @@
-import * as types from './actionTypes';
+// import * as types from './actionTypes';
 
-export function calc(aPileOfState) {
-    return { type: types.TOTAL, aPileOfState: aPileOfState }
-}
+// export function calc(aPileOfState) {
+//     return { type: types.TOTAL, aPileOfState: aPileOfState }
+// }

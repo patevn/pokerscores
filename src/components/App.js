@@ -19,7 +19,8 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    this.props.dispatch(initActions.redo(this.props), totalsActions.calc(this.props));
+    this.props.dispatch(initActions.redo(this.props));
+    this.props.dispatch(initActions.calc(this.props));
   }
 
   handleClickPrev(e) {
@@ -31,7 +32,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Totals total={this.props} />
+        <Totals total={this.props.all.kassie.totals} />
         <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} />
         <OutputForm week={this.props} />
       </div>
@@ -107,35 +108,35 @@ function Totals(props) {
           <tr>
             <th scope="row">Matty</th>
             <td>tba</td>
-            <td>tba</td>
+            <td>{props.total.Matty.cashWon}</td>
             <td>tba</td>
             <td>tba</td>
           </tr>
           <tr>
-            <th scope="row">Mark</th>
+            <th scope="row">Ando</th>
             <td>tba</td>
-            <td>tba</td>
+            <td>{props.total.Ando.cashWon}</td>
             <td>tba</td>
             <td>tba</td>
           </tr>
           <tr>
             <th scope="row">Grady</th>
             <td>tba</td>
-            <td>tba</td>
+            <td>{props.total.Grady.cashWon}</td>
             <td>tba</td>
             <td>tba</td>
           </tr>
           <tr>
             <th scope="row">Greg</th>
             <td>tba</td>
-            <td>tba</td>
+            <td>{props.total.Greg.cashWon}</td>
             <td>tba</td>
             <td>tba</td>
           </tr>
           <tr>
             <th scope="row">Brad</th>
             <td>tba</td>
-            <td>tba</td>
+            <td>{props.total.Brad.cashWon}</td>
             <td>tba</td>
             <td>tba</td>
           </tr>
@@ -149,7 +150,8 @@ function Totals(props) {
 function mapStateToProps(state, ownProps) {
   return {
     iterator: state.kassie.iterator,
-    currentData: state.kassie.currentData
+    currentData: state.kassie.currentData,
+    all: state
   };
 }
 

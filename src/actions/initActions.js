@@ -13,6 +13,10 @@ export function redo(fwd) {
     return { type: types.REDO, fwd: fwd }
 }
 
+export function calc(aPileOfState) {
+    return { type: types.TOTAL, aPileOfState: aPileOfState }
+}
+
 export function loadData() {
     return function (dispatch) {
         return axios.get('https://pokerscores-a9da7.firebaseio.com/scores.json').then(result => {

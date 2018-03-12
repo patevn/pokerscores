@@ -1,9 +1,10 @@
 import * as types from '../actions/actionTypes';
 import moment from 'moment';
 import sortBy from "lodash/sortBy";
+import totalTemplate from './totalTemplate';
 
 export default function initReducer(state = {
-  totals: totalSetup,
+  totals: totalTemplate.setup(),
   data: [],
   currentData: null,
   iterator: 0
@@ -19,9 +20,34 @@ export default function initReducer(state = {
     case types.UNDO:
       let previous = state.iterator - 1
       return Object.assign({}, state, { currentData: state.data[previous], iterator: previous })
+    case types.TOTAL:
+      let totalz = calculator(state)
+      return Object.assign({}, state, { totals: totalz })
     default:
       return state;
   }
+}
+
+function calculator(fwd) {
+  let totals = totalTemplate.setup();
+  fwd.currentData.forEach(element => {
+    if (element.who == "Matty") {
+      totals.Matty.cashWon = Number(fwd.totals.Matty.cashWon) + Number(element.cashWon);
+    }
+    if (element.who == "Ando") {
+      totals.Ando.cashWon = Number(fwd.totals.Ando.cashWon) + Number(element.cashWon);
+    }
+    if (element.who == "Grady") {
+      totals.Grady.cashWon = Number(fwd.totals.Grady.cashWon) + Number(element.cashWon);
+    }
+    if (element.who == "Greg") {
+      totals.Greg.cashWon = Number(fwd.totals.Greg.cashWon) + Number(element.cashWon);
+    }
+    if (element.who == "Brad") {
+      totals.Brad.cashWon = Number(fwd.totals.Brad.cashWon) + Number(element.cashWon);
+    }
+  });
+  return totals;
 }
 
 let chunker = function (data) {
@@ -37,37 +63,4 @@ let chunker = function (data) {
   return chunks;
 }
 
-let totalSetup =
-  {
-    "Matty": {
-      "cashWon": 0,
-      "position": 0,
-      "asshole": false,
-      "president": false
-    },
-    "Grady": {
-      "cashWon": 0,
-      "position": 0,
-      "asshole": false,
-      "president": false
-    },
-    "Greg": {
-      "cashWon": 0,
-      "position": 0,
-      "asshole": false,
-      "president": false
-    },
-    "Brad": {
-      "cashWon": 0,
-      "position": 0,
-      "asshole": false,
-      "president": false
-    },
-    "Ando": {
-      "cashWon": 0,
-      "position": 0,
-      "asshole": false,
-      "president": false
-    }
-  }
 

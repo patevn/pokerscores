@@ -4,8 +4,7 @@ import totals from './totalsReducer';
 
 const rootReducer = combineReducers({
     //this name here means you will be using state.kassie in actions
-    kassie: kassie,
-    totals: totals
+    kassie: kassie
 });
 
 export default rootReducer; 
