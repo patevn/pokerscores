@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as initActions from '../actions/initActions.js';
-import * as totalsActions from '../actions/totalsActions.js';
 
 class App extends React.Component {
 

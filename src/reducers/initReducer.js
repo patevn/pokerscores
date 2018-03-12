@@ -13,6 +13,7 @@ export default function initReducer(state = {
   switch (action.type) {
     case types.LOAD:
       let chunks = chunker(action.result.data);
+      // let total1z = calculator(chunks[0]) , totals: total1z
       return Object.assign({}, state, { data: chunks, currentData: chunks[0] })
     case types.REDO:
       let next = state.iterator + 1
@@ -31,23 +32,27 @@ export default function initReducer(state = {
 function calculator(fwd) {
   let totals = totalTemplate.setup();
   fwd.currentData.forEach(element => {
-    if (element.who == "Matty") {
-      totals.Matty.cashWon = Number(fwd.totals.Matty.cashWon) + Number(element.cashWon);
+    if (element.who === "Matty") {
+      totals.Matty.cashWon = round(Number(fwd.totals.Matty.cashWon) + Number(element.cashWon));
     }
-    if (element.who == "Ando") {
-      totals.Ando.cashWon = Number(fwd.totals.Ando.cashWon) + Number(element.cashWon);
+    if (element.who === "Ando") {
+      totals.Ando.cashWon = round(Number(fwd.totals.Ando.cashWon) + Number(element.cashWon));
     }
-    if (element.who == "Grady") {
-      totals.Grady.cashWon = Number(fwd.totals.Grady.cashWon) + Number(element.cashWon);
+    if (element.who === "Grady") {
+      totals.Grady.cashWon = round(Number(fwd.totals.Grady.cashWon) + Number(element.cashWon));
     }
-    if (element.who == "Greg") {
-      totals.Greg.cashWon = Number(fwd.totals.Greg.cashWon) + Number(element.cashWon);
+    if (element.who === "Greg") {
+      totals.Greg.cashWon = round(Number(fwd.totals.Greg.cashWon) + Number(element.cashWon));
     }
-    if (element.who == "Brad") {
-      totals.Brad.cashWon = Number(fwd.totals.Brad.cashWon) + Number(element.cashWon);
+    if (element.who === "Brad") {
+      totals.Brad.cashWon = round(Number(fwd.totals.Brad.cashWon) + Number(element.cashWon));
     }
   });
   return totals;
+}
+
+function round(value) {
+  return Number(Math.round(value + 'e' + 2) + 'e-' + 2);
 }
 
 let chunker = function (data) {
@@ -62,5 +67,3 @@ let chunker = function (data) {
   }
   return chunks;
 }
-
-
