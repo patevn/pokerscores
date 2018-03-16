@@ -18,8 +18,10 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    this.props.dispatch(initActions.redo(this.props));
-    this.props.dispatch(initActions.calc(this.props));
+    if (this.props.all.kassie.data.length - 1 != this.props.iterator) {
+      this.props.dispatch(initActions.redo(this.props));
+      this.props.dispatch(initActions.calc(this.props));
+    }
   }
 
   handleClickPrev(e) {
