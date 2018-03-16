@@ -108,36 +108,36 @@ function Totals(props) {
             <th scope="row">Matty</th>
             <td>{props.total.Matty.position}</td>
             <td>{props.total.Matty.cashWon}</td>
-            <td>{String(props.total.Matty.president)}</td>
-            <td>{String(props.total.Matty.asshole)}</td>
+            <td>{props.total.Matty.president}</td>
+            <td>{props.total.Matty.asshole}</td>
           </tr>
           <tr>
             <th scope="row">Ando</th>
             <td>{props.total.Ando.position}</td>
             <td>{props.total.Ando.cashWon}</td>
-            <td>{String(props.total.Ando.president)}</td>
-            <td>{String(props.total.Ando.asshole)}</td>
+            <td>{props.total.Ando.president}</td>
+            <td>{props.total.Ando.asshole}</td>
           </tr>
           <tr>
             <th scope="row">Grady</th>
             <td>{props.total.Grady.position}</td>
             <td>{props.total.Grady.cashWon}</td>
-            <td>{String(props.total.Grady.president)}</td>
-            <td>{String(props.total.Grady.asshole)}</td>
+            <td>{props.total.Grady.president}</td>
+            <td>{props.total.Grady.asshole}</td>
           </tr>
           <tr>
             <th scope="row">Greg</th>
             <td>{props.total.Greg.position}</td>
             <td>{props.total.Greg.cashWon}</td>
-            <td>{String(props.total.Greg.president)}</td>
-            <td>{String(props.total.Greg.asshole)}</td>
+            <td>{props.total.Greg.president}</td>
+            <td>{props.total.Greg.asshole}</td>
           </tr>
           <tr>
             <th scope="row">Brad</th>
             <td>{props.total.Brad.position}</td>
             <td>{props.total.Brad.cashWon}</td>
-            <td>{String(props.total.Brad.president)}</td>
-            <td>{String(props.total.Brad.asshole)}</td>
+            <td>{props.total.Brad.president}</td>
+            <td>{props.total.Brad.asshole}</td>
           </tr>
         </tbody>
       </table>

@@ -4,32 +4,32 @@ export default class totalTemplate {
             "Matty": {
                 "cashWon": 0,
                 "position": 0,
-                "asshole": false,
-                "president": false
+                "asshole": 0,
+                "president": 0
             },
             "Grady": {
                 "cashWon": 0,
                 "position": 0,
-                "asshole": false,
-                "president": false
+                "asshole": 0,
+                "president": 0
             },
             "Greg": {
                 "cashWon": 0,
                 "position": 0,
-                "asshole": false,
-                "president": false
+                "asshole": 0,
+                "president": 0
             },
             "Brad": {
                 "cashWon": 0,
                 "position": 0,
-                "asshole": false,
-                "president": false
+                "asshole": 0,
+                "president": 0
             },
             "Ando": {
                 "cashWon": 0,
                 "position": 0,
-                "asshole": false,
-                "president": false
+                "asshole": 0,
+                "president": 0
             }
         }
     }
