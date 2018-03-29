@@ -5,16 +5,8 @@ export function loadScores(result) {
     return { type: types.LOAD, result: result }
 }
 
-export function undo(back) {
-    return { type: types.UNDO, back: back }
-}
-
-export function redo(fwd) {
-    return { type: types.REDO, fwd: fwd }
-}
-
 export function calc(aPileOfState) {
-    return { type: types.TOTAL, aPileOfState: aPileOfState }
+    return { type: types.CALC, aPileOfState: aPileOfState }
 }
 
 export function loadData() {

@@ -2,8 +2,16 @@ import * as types from '../actions/actionTypes';
 import moment from 'moment';
 import sortBy from "lodash/sortBy";
 import totalTemplate from './totalTemplate';
+import undoable, { distinctState } from 'redux-undo';
 
-export default function initReducer(state = {
+
+const undoableTodos = undoable(initReducer, {
+  filter: distinctState()
+})
+
+
+
+function initReducer(state = {
   totals: totalTemplate.setup(),
   data: [],
   currentData: null,
@@ -15,15 +23,10 @@ export default function initReducer(state = {
       let chunks = chunker(action.result.data);
       let total1z = initCalculator(chunks[0])
       return Object.assign({}, state, { data: chunks, currentData: chunks[0], totals: total1z })
-    case types.REDO:
+    case types.CALC:
       let next = state.iterator + 1
-      return Object.assign({}, state, { currentData: state.data[next], iterator: next })
-    case types.UNDO:
-      let previous = state.iterator - 1
-      return Object.assign({}, state, { currentData: state.data[previous], iterator: previous })
-    case types.TOTAL:
       let totalz = calculator(state)
-      return Object.assign({}, state, { totals: totalz })
+      return Object.assign({}, state, { totals: totalz, currentData: state.data[next], iterator: next })
     default:
       return state;
   }
@@ -124,3 +127,5 @@ let chunker = function (data) {
   }
   return chunks;
 }
+
+export default undoableTodos;
