@@ -9,8 +9,6 @@ const undoableTodos = undoable(initReducer, {
   filter: distinctState()
 })
 
-
-
 function initReducer(state = {
   totals: totalTemplate.setup(),
   data: [],
@@ -21,8 +19,8 @@ function initReducer(state = {
   switch (action.type) {
     case types.LOAD:
       let chunks = chunker(action.result.data);
-      let total1z = initCalculator(chunks[0])
-      return Object.assign({}, state, { data: chunks, currentData: chunks[0], totals: total1z })
+      let tempTotals = initCalculator(chunks[0])
+      return Object.assign({}, state, { data: chunks, currentData: chunks[0], totals: tempTotals })
     case types.CALC:
       let next = state.iterator + 1
       let totalz = calculator(state)

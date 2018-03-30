@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as initActions from '../actions/initActions.js';
-import UndoRedo from './UndoRedo.js'
+import UndoRedo from '../containers/UndoRedo.js';
 
 class App extends React.Component {
 
@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    if (this.props.all.data.length - 1 != this.props.iterator) {
+    if (this.props.all.data.length - 1 !== this.props.iterator) {
       this.props.dispatch(initActions.calc(this.props));
     }
   }
@@ -22,7 +22,7 @@ class App extends React.Component {
         <Totals total={this.props.all.totals} />
         <UndoRedo />
         <Buttons onNextClick={this.handleClickNext} />
-        <OutputForm week={this.props} />
+        <OutputForm week={this.props.all} />
       </div>
     );
   }
@@ -130,8 +130,6 @@ function Totals(props) {
 //this returns the props we will use on our component
 function mapStateToProps(state, ownProps) {
   return {
-    iterator: state.kassie.present.iterator,
-    currentData: state.kassie.present.currentData,
     all: state.kassie.present
   };
 }
