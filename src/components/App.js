@@ -20,8 +20,10 @@ class App extends React.Component {
     return (
       <div>
         <Totals total={this.props.all.totals} />
-        <UndoRedo />
-        <Buttons onNextClick={this.handleClickNext} />
+        <div className="top">
+          <UndoRedo />
+          <Buttons onNextClick={this.handleClickNext} />
+        </div>
         <OutputForm week={this.props.all} />
       </div>
     );

@@ -7,9 +7,6 @@ let UndoRedo = ({ canUndo, canRedo, onUndo, onRedo }) => (
         <button className="btn btn-danger btn-cons" onClick={onUndo} disabled={!canUndo}>
             Prev
        </button>
-        <button onClick={onRedo} disabled={!canRedo}>
-            Redo
-       </button>
     </p>
 )
 
