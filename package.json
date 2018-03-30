@@ -17,7 +17,7 @@
     "redux-immutable-state-invariant": "^2.1.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "redux-undo": "^0.6.1"
+    "redux-undo": "1.0.0-beta9-9-6"
   },
   "scripts": {
     "start": "react-scripts start",

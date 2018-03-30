@@ -15,7 +15,7 @@ import logger from 'redux-logger';
 const initialState = configureStore();
 initialState.dispatch(loadData());
 
-//move this back into into (original) configure store class 
+//TODO: move this back into into (original) configure store class 
 export default function configureStore(initialState) {
     return createStore(
         rootReducer,

@@ -1,41 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import * as initActions from '../actions/initActions.js';
+import UndoRedo from '../containers/UndoRedo.js';
 
 class App extends React.Component {
 
   constructor(props, context) {
     super(props, context);
     this.handleClickNext = this.handleClickNext.bind(this);
-    this.handleClickPrev = this.handleClickPrev.bind(this);
-  }
-
-  componentWillUnmount() {
-    this.serverRequest.abort();
-  }
-
-  componentDidMount() {
   }
 
   handleClickNext(e) {
-    if (this.props.all.kassie.data.length - 1 != this.props.iterator) {
-      this.props.dispatch(initActions.redo(this.props));
+    if (this.props.all.data.length - 1 !== this.props.all.iterator) {
       this.props.dispatch(initActions.calc(this.props));
     }
-  }
-
-  handleClickPrev(e) {
-    if (this.props.iterator >= 1) {
-      this.props.dispatch(initActions.undo(this.props));
-    }
+    if (this.props.all.data.length - 1 === this.props.all.iterator)
+      alert("you are at the end, play more games");
   }
 
   render() {
     return (
       <div>
-        <Totals total={this.props.all.kassie.totals} />
-        <Buttons onNextClick={this.handleClickNext} onPrevClick={this.handleClickPrev} />
-        <OutputForm week={this.props} />
+        <Totals total={this.props.all.totals} />
+        <div className="top">
+          <UndoRedo />
+          <Buttons onNextClick={this.handleClickNext} />
+        </div>
+        <OutputForm week={this.props.all} />
       </div>
     );
   }
@@ -46,23 +37,16 @@ class Buttons extends React.Component {
   constructor(props) {
     super(props);
     this.handleChangeNext = this.handleChangeNext.bind(this);
-    this.handleChangePrev = this.handleChangePrev.bind(this);
   }
 
   handleChangeNext(e) {
     this.props.onNextClick(e.target.value);
   }
 
-  handleChangePrev(e) {
-    this.props.onPrevClick(e.target.value);
-  }
 
   render() {
     return (
       <div>
-        <button className="btn btn-danger btn-cons" onClick={this.handleChangePrev}>
-          Prev
-          </button>
         <button className="btn btn-success loading" onClick={this.handleChangeNext} >
           Next
           </button>
@@ -150,9 +134,7 @@ function Totals(props) {
 //this returns the props we will use on our component
 function mapStateToProps(state, ownProps) {
   return {
-    iterator: state.kassie.iterator,
-    currentData: state.kassie.currentData,
-    all: state
+    all: state.kassie.present
   };
 }
 
