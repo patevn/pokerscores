@@ -11,9 +11,11 @@ class App extends React.Component {
   }
 
   handleClickNext(e) {
-    if (this.props.all.data.length - 1 !== this.props.iterator) {
+    if (this.props.all.data.length - 1 !== this.props.all.iterator) {
       this.props.dispatch(initActions.calc(this.props));
     }
+    if (this.props.all.data.length - 1 === this.props.all.iterator)
+      alert("you are at the end, play more games");
   }
 
   render() {
