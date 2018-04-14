@@ -7,3 +7,17 @@ body {
   font-weight: bold;
   display: flex;
 }
+.menu {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  
+}
+.main {
+  position: relative;
+  top: 200px;
+  left: 46%
+}
