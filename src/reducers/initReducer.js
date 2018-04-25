@@ -18,8 +18,12 @@ function initReducer(state = {
 
   switch (action.type) {
     case types.LOAD:
-      let chunks = chunker(action.result.data);
+      return Object.assign({}, state, { data: action.result.data })
+    case types.SEASON:
+      let chunks = chunker(state.data);
       let tempTotals = initCalculator(chunks[0])
+      // const result = state.data.filter(season => season.length > 6);
+      // let season1 = stripper(state.data, action.type);
       return Object.assign({}, state, { data: chunks, currentData: chunks[0], totals: tempTotals })
     case types.CALC:
       let next = state.iterator + 1
@@ -29,6 +33,17 @@ function initReducer(state = {
       return state;
   }
 }
+
+// function stripper(data, action) {
+
+//   if (action.type === SEASON1) {
+//     return
+//   }
+
+
+
+
+// }
 
 //TODO: prob a better solution then a seperate initCalc, will card it up
 function initCalculator(fwd) {

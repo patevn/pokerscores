@@ -5,6 +5,10 @@ export function loadScores(result) {
     return { type: types.LOAD, result: result }
 }
 
+export function season(season) {
+    return { type: types.SEASON, season }
+}
+
 export function calc(aPileOfState) {
     return { type: types.CALC, aPileOfState: aPileOfState }
 }
