@@ -4,7 +4,6 @@ import sortBy from "lodash/sortBy";
 import totalTemplate from './totalTemplate';
 import undoable, { distinctState } from 'redux-undo';
 
-
 const undoableTodos = undoable(initReducer, {
   filter: distinctState()
 })
@@ -13,14 +12,21 @@ function initReducer(state = {
   totals: totalTemplate.setup(),
   data: [],
   currentData: null,
-  iterator: 0
+  iterator: 0,
+  season: 0
 }, action) {
 
   switch (action.type) {
     case types.LOAD:
-      let chunks = chunker(action.result.data);
-      let tempTotals = initCalculator(chunks[0])
-      return Object.assign({}, state, { data: chunks, currentData: chunks[0], totals: tempTotals })
+      return Object.assign({}, state, { data: action.result.data })
+    case types.SEASON1:
+      let chunks1 = chunker(state.data, 1);
+      let tempTotals1 = initCalculator(chunks1[0])
+      return Object.assign({}, state, { data: chunks1, currentData: chunks1[0], totals: tempTotals1, season: 1 })
+    case types.SEASON2:
+      let chunks2 = chunker(state.data, 2);
+      let tempTotals2 = initCalculator(chunks2[0])
+      return Object.assign({}, state, { data: chunks2, currentData: chunks2[0], totals: tempTotals2, season: 2 })
     case types.CALC:
       let next = state.iterator + 1
       let totalz = calculator(state)
@@ -113,9 +119,10 @@ function round(value) {
   return Number(Math.round(value + 'e' + 2) + 'e-' + 2);
 }
 
-let chunker = function (data) {
+let chunker = function (data, season) {
   let sort = sortBy(data, function (o) { return new moment(o.gameDate); });
-  let chunks = chunker(sort, 5);
+  const filterer = sort.filter(sorts => sorts.season === season);
+  let chunks = chunker(filterer, 5);
 
   function chunker(arr, chunkSize) {
     let R = [];

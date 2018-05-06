@@ -5,6 +5,7 @@ import UndoRedo from '../containers/UndoRedo.js';
 import OutputForm from '../components/OutputForm.js';
 import Totals from '../components/Totals.js';
 import Buttons from '../components/Buttons.js';
+import Season from '../components/Season.js';
 
 class App extends React.Component {
 
@@ -24,6 +25,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <Season season={this.props.all.season} />
         <Totals total={this.props.all.totals} />
         <div className="top">
           <UndoRedo />
