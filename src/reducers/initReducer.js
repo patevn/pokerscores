@@ -20,13 +20,19 @@ function initReducer(state = {
     case types.LOAD:
       return Object.assign({}, state, { data: action.result.data })
     case types.SEASON1:
-      let chunks1 = chunker(state.data, 1);
-      let tempTotals1 = initCalculator(chunks1[0])
-      return Object.assign({}, state, { data: chunks1, currentData: chunks1[0], totals: tempTotals1, season: 1 })
+      if (!(state.data instanceof Array)) {
+        let chunks1 = chunker(state.data, 1)
+        let tempTotals1 = initCalculator(chunks1[0])
+        return Object.assign({}, state, { data: chunks1, currentData: chunks1[0], totals: tempTotals1, season: 1 })
+      }
+      else { return state };
     case types.SEASON2:
-      let chunks2 = chunker(state.data, 2);
-      let tempTotals2 = initCalculator(chunks2[0])
-      return Object.assign({}, state, { data: chunks2, currentData: chunks2[0], totals: tempTotals2, season: 2 })
+      if (!(state.data instanceof Array)) {
+        let chunks2 = chunker(state.data, 2);
+        let tempTotals2 = initCalculator(chunks2[0])
+        return Object.assign({}, state, { data: chunks2, currentData: chunks2[0], totals: tempTotals2, season: 2 })
+      }
+      else { return state };
     case types.CALC:
       let next = state.iterator + 1
       let totalz = calculator(state)
@@ -120,8 +126,9 @@ function round(value) {
 }
 
 let chunker = function (data, season) {
+  // if (Array.isArray(data)) {
   let sort = sortBy(data, function (o) { return new moment(o.gameDate); });
-  const filterer = sort.filter(sorts => sorts.season === season);
+  const filterer = sort.filter(sorts => sorts.season === season); // array bad. data is in a differnt state here so it blows up, could jsut try and capture that error message nad put a null check
   let chunks = chunker(filterer, 5);
 
   function chunker(arr, chunkSize) {
@@ -131,6 +138,7 @@ let chunker = function (data, season) {
     return R;
   }
   return chunks;
+  // }
 }
 
 export default undoableTodos;
