@@ -4,14 +4,17 @@ export default function Table(props) {
 
     function ListItem(props) {
 
-        const ul = <ul>
-            <li>{props.value.name}</li>
-            <li>{props.value.president}</li>
-            <li>{props.value.asshole}</li>
-            <li>{props.value.cashWon}</li>
-            <li>{props.value.position}</li>
-        </ul>
-        return ul;
+        const tb =
+            <tbody>
+                <tr>
+                    <th scope="row">{props.value.name}</th>
+                    <td>{props.value.position}</td>
+                    <td>{props.value.cashWon}</td>
+                    <td>{props.value.president}</td>
+                    <td>{props.value.asshole}</td>
+                </tr>
+            </tbody>
+        return tb;
     }
 
     let list = Object.values(props.total)
@@ -21,9 +24,18 @@ export default function Table(props) {
 
     );
     return (
-        <ul>
+        <table className="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Total Points</th>
+                    <th>Total $</th>
+                    <th>President</th>
+                    <th>AssHole</th>
+                </tr>
+            </thead>
             {listItems}
-        </ul>
+        </table>
     );
 
 }
