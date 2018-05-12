@@ -1,4 +1,5 @@
 import React from "react";
+import sortBy from "lodash/sortBy";
 
 export default function Table(props) {
 
@@ -7,6 +8,7 @@ export default function Table(props) {
             <tbody>
                 <tr>
                     <th scope="row">{props.value.name}</th>
+                    <td>{props.value.currentPosition}</td>
                     <td>{props.value.totalPoints}</td>
                     <td>{props.value.cashWon}</td>
                     <td>{props.value.president}</td>
@@ -17,8 +19,10 @@ export default function Table(props) {
     }
 
     let list = Object.values(props.total)
+    let sortedList = sortBy(list, ['currentPosition']);
 
-    const listItems = list.map((number, key) =>
+
+    const listItems = sortedList.map((number, key) =>
         <ListItem key={key} value={number} />
     );
 
@@ -27,6 +31,7 @@ export default function Table(props) {
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Current Position</th>
                     <th>Total Points</th>
                     <th>Total $</th>
                     <th>President</th>
