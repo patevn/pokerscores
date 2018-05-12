@@ -90,28 +90,28 @@ function calculator(fwd) {
       element.president === true ? (totals.Matty.president = adder(fwd.totals.Matty.president, element.president)) : (totals.Matty.president = fwd.totals.Matty.president);
     }
     if (element.who === "Ando") {
-      totals.Matty.currentPosition = Number(element.position);
+      totals.Ando.currentPosition = Number(element.position);
       totals.Ando.cashWon = round(Number(fwd.totals.Ando.cashWon) + Number(element.cashWon));
       totals.Ando.totalPoints = round(Number(fwd.totals.Ando.totalPoints) + Number(element.position));
       element.asshole === true ? (totals.Ando.asshole = adder(fwd.totals.Ando.asshole, element.asshole)) : (totals.Ando.asshole = fwd.totals.Ando.asshole);
       element.president === true ? (totals.Ando.president = adder(fwd.totals.Ando.president, element.president)) : (totals.Ando.president = fwd.totals.Ando.president);
     }
     if (element.who === "Grady") {
-      totals.Matty.currentPosition = Number(element.position);
+      totals.Grady.currentPosition = Number(element.position);
       totals.Grady.cashWon = round(Number(fwd.totals.Grady.cashWon) + Number(element.cashWon));
       totals.Grady.totalPoints = round(Number(fwd.totals.Grady.totalPoints) + Number(element.position));
       element.asshole === true ? (totals.Grady.asshole = adder(fwd.totals.Grady.asshole, element.asshole)) : (totals.Grady.asshole = fwd.totals.Grady.asshole);
       element.president === true ? (totals.Grady.president = adder(fwd.totals.Grady.president, element.president)) : (totals.Grady.president = fwd.totals.Grady.president);
     }
     if (element.who === "Greg") {
-      totals.Matty.currentPosition = Number(element.position);
+      totals.Greg.currentPosition = Number(element.position);
       totals.Greg.cashWon = round(Number(fwd.totals.Greg.cashWon) + Number(element.cashWon));
       totals.Greg.totalPoints = round(Number(fwd.totals.Greg.totalPoints) + Number(element.position));
       element.asshole === true ? (totals.Greg.asshole = adder(fwd.totals.Greg.asshole, element.asshole)) : (totals.Greg.asshole = fwd.totals.Greg.asshole);
       element.president === true ? (totals.Greg.president = adder(fwd.totals.Greg.president, element.president)) : (totals.Greg.president = fwd.totals.Greg.president);
     }
     if (element.who === "Brad") {
-      totals.Matty.currentPosition = Number(element.position);
+      totals.Brad.currentPosition = Number(element.position);
       totals.Brad.cashWon = round(Number(fwd.totals.Brad.cashWon) + Number(element.cashWon));
       totals.Brad.totalPoints = round(Number(fwd.totals.Brad.totalPoints) + Number(element.position));
       element.asshole === true ? (totals.Brad.asshole = adder(fwd.totals.Brad.asshole, element.asshole)) : (totals.Brad.asshole = fwd.totals.Brad.asshole);
