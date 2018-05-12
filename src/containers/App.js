@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import * as initActions from '../actions/initActions.js';
 import UndoRedo from '../containers/UndoRedo.js';
 import OutputForm from '../components/OutputForm.js';
-import Totals from '../components/Totals.js';
+import Table from '../components/Table.js';
 import Buttons from '../components/Buttons.js';
 import Season from '../components/Season.js';
 
@@ -26,7 +26,7 @@ class App extends React.Component {
     return (
       <div>
         <Season season={this.props.all.season} />
-        <Totals total={this.props.all.totals} />
+        <Table total={this.props.all.totals} />
         <div className="top">
           <UndoRedo />
           <Buttons onNextClick={this.handleClickNext} />
