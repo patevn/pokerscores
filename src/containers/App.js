@@ -16,7 +16,11 @@ class App extends React.Component {
 
   handleClickNext(e) {
     if (this.props.all.data.length - 1 !== this.props.all.iterator) {
-      this.props.dispatch(initActions.calc(this.props));
+      let placer = this.props.all.placer;
+
+      placer++;
+      this.props.dispatch(initActions.calc(this.props, placer));
+
     }
     if (this.props.all.data.length - 1 === this.props.all.iterator)
       alert("you are at the end, play more games");
@@ -26,10 +30,10 @@ class App extends React.Component {
     return (
       <div>
         <Season season={this.props.all.season} />
-        <Table total={this.props.all.totals} />
+        <UndoRedo />
+        <Buttons onNextClick={this.handleClickNext} />
+        <Table total={this.props.all} />
         <div className="top">
-          <UndoRedo />
-          <Buttons onNextClick={this.handleClickNext} />
         </div>
         <OutputForm week={this.props.all} />
       </div>

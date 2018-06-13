@@ -1,44 +1,53 @@
 import React from "react";
+import ListItem from '../components/ListItem.js';
 import sortBy from "lodash/sortBy";
 
-export default function Table(props) {
+export default class Table extends React.Component {
 
-    function ListItem(props) {
-        const tb =
-            <tbody>
-                <tr>
-                    <th scope="row">{props.value.name}</th>
-                    <td>{props.value.currentPosition}</td>
-                    <td>{props.value.totalPoints}</td>
-                    <td>{props.value.cashWon}</td>
-                    <td>{props.value.president}</td>
-                    <td>{props.value.asshole}</td>
-                </tr>
-            </tbody>
-        return tb;
+    constructor(props) {
+        super(props);
+        let list = Object.values(this.props.total.totals);
+        let _sortedList = sortBy(list, ['currentPosition']);
+        let _growingList = [];
+        this.state = {
+            i: 0,
+            sortedList: _sortedList,
+            growingList: _growingList
+        };
+        this.handleClickNextPlace = this.handleClickNextPlace.bind(this);
     }
 
-    let list = Object.values(props.total)
-    let sortedList = sortBy(list, ['currentPosition']);
+    handleClickNextPlace(e) {
+        if (this.state.growingList.length === this.state.sortedList.length) {
+            this.setState({ growingList: [] });
+            this.setState({ i: 0 });
+        };
 
+        let i = this.state.i;
+        let glup = this.state.growingList;
+        glup.push(this.state.sortedList[i]);
+        i++;
+        this.setState({ growingList: glup });
+        this.setState({ i: i });
+    }
 
-    const listItems = sortedList.map((number, key) =>
-        <ListItem key={key} value={number} />
-    );
+    componentWillReceiveProps() {
+        let list = Object.values(this.props.total.totals);
+        let _sortedList = sortBy(list, ['currentPosition']);
+        let _growingList = [];
+        this.setState({
+            i: 0,
+            sortedList: _sortedList,
+            growingList: _growingList
+        })
 
-    return (
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Current Position</th>
-                    <th>Total Points</th>
-                    <th>Total $</th>
-                    <th>President</th>
-                    <th>AssHole</th>
-                </tr>
-            </thead>
-            {listItems}
-        </table>
-    );
+    }
+    render() {
+        return (
+            <div>
+                <button onClick={this.handleClickNextPlace} disabled={this.state.i === 5}> Activate</button>
+                <ListItem list={this.state.growingList} />
+            </div>
+        )
+    }
 }
