@@ -26,7 +26,7 @@ export default function ListItem(props) {
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>Current Position</th>
+                        <th>Weekly Position</th>
                         <th>Total Points</th>
                         <th>Total $</th>
                         <th>President</th>
