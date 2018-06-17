@@ -47,7 +47,7 @@ export default class Table extends React.Component {
     render() {
         return (
             <div>
-                <button onClick={this.handleClickNextPlace} disabled={this.state.i === 5}> Activate</button>
+                <button className="btn btn-primary" onClick={this.handleClickNextPlace} disabled={this.state.i === 5}> Next Place</button>
                 <ListItem list={this.state.growingList} />
             </div>
         )
