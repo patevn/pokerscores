@@ -16,10 +16,7 @@ class App extends React.Component {
 
   handleClickNext(e) {
     if (this.props.all.data.length - 1 !== this.props.all.iterator) {
-      let placer = this.props.all.placer;
-
-      placer++;
-      this.props.dispatch(initActions.calc(this.props, placer));
+      this.props.dispatch(initActions.calc(this.props));
 
     }
     if (this.props.all.data.length - 1 === this.props.all.iterator)
