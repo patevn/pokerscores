@@ -29,7 +29,8 @@ class App extends React.Component {
     return (
       <div>
         <Season season={this.props.all.season} />  
-        <Week week={this.props.all.currentData[0].gameDate} /> 
+        {this.props.all.currentData != null &&
+        <Week week={this.props.all.currentData[0].gameDate} /> }
         <UndoRedo />
         <Buttons onNextClick={this.handleClickNext} />
         <Table total={this.props.all} />
