@@ -21,3 +21,9 @@ body {
   top: 200px;
   left: 46%
 }
+.alignleft {
+	float: left;
+}
+.alignright {
+	float: right;
+}

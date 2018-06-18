@@ -15,7 +15,7 @@ export function season2(season2) {
 }
 
 export function calc(aPileOfState) {
-    return { type: types.CALC, aPileOfState: aPileOfState }
+    return { type: types.CALC, aPileOfState: aPileOfState}
 }
 
 export function loadData() {

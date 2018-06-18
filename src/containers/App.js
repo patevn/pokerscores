@@ -6,6 +6,7 @@ import OutputForm from '../components/OutputForm.js';
 import Table from '../components/Table.js';
 import Buttons from '../components/Buttons.js';
 import Season from '../components/Season.js';
+import Week from '../components/Week.js';
 
 class App extends React.Component {
 
@@ -17,19 +18,23 @@ class App extends React.Component {
   handleClickNext(e) {
     if (this.props.all.data.length - 1 !== this.props.all.iterator) {
       this.props.dispatch(initActions.calc(this.props));
+
     }
     if (this.props.all.data.length - 1 === this.props.all.iterator)
       alert("you are at the end, play more games");
   }
+  
 
   render() {
     return (
       <div>
-        <Season season={this.props.all.season} />
-        <Table total={this.props.all.totals} />
+        <Season season={this.props.all.season} />  
+        {this.props.all.currentData != null &&
+        <Week week={this.props.all.currentData[0].gameDate} /> }
+        <UndoRedo />
+        <Buttons onNextClick={this.handleClickNext} />
+        <Table total={this.props.all} />
         <div className="top">
-          <UndoRedo />
-          <Buttons onNextClick={this.handleClickNext} />
         </div>
         <OutputForm week={this.props.all} />
       </div>
