@@ -32,8 +32,8 @@ export default class Table extends React.Component {
         this.setState({ i: i });
     }
 
-    componentWillReceiveProps() {
-        let list = Object.values(this.props.total.totals);
+    componentWillReceiveProps(newProps) {
+        let list = Object.values(newProps.total.totals);
         let _sortedList = sortBy(list, ['currentPosition']);
         _sortedList.reverse();
         let _growingList = [];
