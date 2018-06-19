@@ -18,6 +18,18 @@ export default class Table extends React.Component {
         this.handleClickNextPlace = this.handleClickNextPlace.bind(this);
     }
 
+    downFunction = (e) => {
+        if (e.keyCode === 40 && this.state.i < 5) {
+            this.handleClickNextPlace();
+        }
+    }
+    componentDidMount() {
+        document.addEventListener("keydown", this.downFunction, false);
+    }
+    componentWillUnmount() {
+        document.removeEventListener("keydown", this.downFunction, false);
+    }
+
     handleClickNextPlace(e) {
         if (this.state.growingList.length === this.state.sortedList.length) {
             this.setState({ growingList: [] });
