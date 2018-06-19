@@ -27,3 +27,7 @@ body {
 .alignright {
 	float: right;
 }
+
+.whiter {
+  color: white;
+}
