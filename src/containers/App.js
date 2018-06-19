@@ -12,7 +12,23 @@ class App extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+
   }
+
+  componentDidMount() {
+    document.addEventListener("keydown", this.rightFunction, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener("keydown", this.rightFunction, false);
+  }
+
+  rightFunction = (e) => {
+    if (e.keyCode === 32 || e.keyCode === 39) {
+      this.handleClickNext();
+    }
+  }
+
+
 
   handleClickNext = (e) => {
     if (this.props.all.data.length - 1 !== this.props.all.iterator) {
@@ -26,9 +42,9 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <Season season={this.props.all.season} />  
+        <Season season={this.props.all.season} />
         {this.props.all.currentData != null &&
-        <Week week={this.props.all.currentData[0].gameDate} /> }
+          <Week week={this.props.all.currentData[0].gameDate} />}
         <UndoRedo />
         <Buttons onNextClick={this.handleClickNext} />
         <Table total={this.props.all} />
