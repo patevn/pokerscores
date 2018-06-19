@@ -20,7 +20,7 @@ class App extends React.Component {
 
     }
     if (this.props.all.data.length - 1 === this.props.all.iterator)
-      alert("you are at the end, play more games");
+      alert("This is the last game");
   }
 
   render() {
